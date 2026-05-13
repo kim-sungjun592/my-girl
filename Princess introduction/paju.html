@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세 번째 데이트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <h2 class="logo">
+                <a href="index.html" style="text-decoration:none; color:inherit;">우리<span>활동</span></a>
+            </h2>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="date.html">갤러리</a></li>
+                <li><a href="date.html">데이트 장소</a></li>
+            </ul>
+        </nav>
+    </header>
+    <style>
+        /* [1] 기본 스타일 초기화 (퍼스트가든의 우아한 아이보리 바탕) */
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #fdfbf7;
+            /* 따뜻하고 고급스러운 아이보리 */
+            /* 은은하게 빛나는 조명(별빛) 느낌의 배경 효과 */
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.04) 150px, transparent 250px),
+                radial-gradient(circle at 85% 20%, rgba(212, 175, 55, 0.06) 200px, transparent 350px);
+            font-family: 'Noto Sans KR', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* [2] 헤더(메뉴바) 스타일 - 클래식하고 깔끔하게 */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border-bottom: 2px solid #d4af37;
+            /* 고급스러운 골드 라인 포인트 */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* 메뉴바 안쪽 내용 정렬 */
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 로고 스타일 (유럽 정원의 짙은 녹색) */
+        .logo a {
+            text-decoration: none;
+            color: #1b4332;
+            /* 깊은 숲/정원색 */
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #d4af37;
+            /* 포인트는 샴페인 골드 */
+        }
+
+        /* 메뉴 리스트 스타일 */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        /* 마우스 올렸을 때 반짝이는 별빛 느낌 추가 */
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a:hover::after {
+            content: '✨';
+            position: absolute;
+            top: -10px;
+            right: -15px;
+            font-size: 0.8rem;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.5;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* [3] 갤러리 스타일 (클래식한 미술관 액자 느낌) */
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-container img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            /* 살짝만 둥글게 해서 정돈된 느낌 */
+            border: 6px solid #fff;
+            /* 하얀색 갤러리 매트 느낌 */
+            /* 은은한 그림자와 얇은 회색 테두리로 이중 액자 효과 */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 0 0 1px #eaeaea;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-container img:hover {
+            transform: translateY(-8px) scale(1.02);
+            /* 마우스 올리면 조명을 받은 것처럼 골드빛 그림자와 테두리 */
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25), 0 0 0 2px #d4af37;
+        }
+
+        /* 제목 스타일 (정원 입구의 고급스러운 현판 느낌) */
+        h1 {
+            background: linear-gradient(135deg, #1b4332, #2d6a4f);
+            /* 깊고 짙은 정원색 */
+            padding: 15px 40px;
+            margin: 30px auto;
+            color: #fdfbf7;
+            font-weight: 800;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            border: 2px solid #d4af37;
+            /* 골드 테두리 */
+            box-shadow: 0 8px 20px rgba(27, 67, 50, 0.3);
+            display: inline-block;
+            /* 글자 길이에 맞춰 배경 크기 조절 */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 버튼 스타일 */
+        .btn-back {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #b5952f);
+            /* 고급스러운 샴페인 골드 */
+            color: white;
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        /* 버튼 마우스 올렸을 때 정원색으로 반전 */
+        .btn-back:hover {
+            background: linear-gradient(135deg, #1b4332, #2d6a4f);
+            box-shadow: 0 8px 20px rgba(27, 67, 50, 0.4);
+            transform: translateY(-3px);
+        }
+    </style>
+
+    <h1 style="text-align: center; margin-top: 20px;">파주 데이트❤️</h1>
+
+
+
+    <div class="gallery-container">
+        <img src="img/1111.png" alt="사진1">
+        <img src="img/2222.png" alt="사진2">
+        <img src="img/3333.png" alt="사진3">
+        <img src="img/4444.png" alt="사진4">
+        <img src="img/5555.png" alt="사진5">
+
+    </div>
+
+    <div style="text-align: center; margin: 60px 0;">
+        <a href="date.html" class="btn-back">돌아가기</a>
+    </div>
+
+
+
+</body>
+
+</html>

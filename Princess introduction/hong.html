@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>열 한 번째 데이트</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* [1] 기본 스타일 초기화 (깊은 심해 배경 및 부유물 애니메이션 적용) */
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-family: 'Noto Sans KR', sans-serif;
+            min-height: 100vh;
+            color: #e2e8f0;
+
+            /* 아주 깊고 어두운 심해의 기본 바탕색 */
+            background-color: #010812;
+
+            /* 수면의 빛줄기와 심해 부유물(기포, 플랑크톤) 효과 */
+            background-image:
+                /* 1. 아득한 수면 위에서 스며들어오는 푸른 빛줄기 */
+                radial-gradient(circle at 50% -20%, rgba(14, 165, 233, 0.25), transparent 60%),
+                /* 2. 바닥으로 갈수록 완벽한 칠흑으로 변하는 깊이감 */
+                linear-gradient(180deg, transparent 0%, #000000 100%),
+                /* 3. 서로 다른 크기와 투명도의 심해 부유물들 */
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 1px, transparent 2px),
+                radial-gradient(circle at 75% 40%, rgba(56, 189, 248, 0.08) 2px, transparent 3px),
+                radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.04) 1.5px, transparent 2.5px);
+
+            /* 배경 패턴 사이즈 (부유물들이 자연스럽게 흩어지도록) */
+            background-size: 100% 100%, 100% 100%, 150px 150px, 250px 250px, 200px 200px;
+            background-attachment: fixed;
+
+            /* 부유물들이 천천히 위로 떠오르는 애니메이션 실행 */
+            animation: deepSeaParticles 40s linear infinite;
+        }
+
+        /* 심해 부유물이 위로 떠오르는 애니메이션 키프레임 */
+        @keyframes deepSeaParticles {
+            0% {
+                background-position: 0 0, 0 0, 0 0, 0 0, 0 0;
+            }
+
+            100% {
+                background-position: 0 0, 0 0, 0 -150px, 0 -250px, 0 -200px;
+            }
+        }
+
+        /* [2] 헤더(메뉴바) 스타일 - 심해 탐사선의 어두운 유리창 느낌 */
+        header {
+            background: rgba(5, 22, 34, 0.7);
+            backdrop-filter: blur(15px);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+        }
+
+        /* 메뉴바 안쪽 내용 정렬 */
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 로고 스타일 (심해에서 빛나는 네온 블루) */
+        .logo a {
+            text-decoration: none;
+            color: #38bdf8;
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: -1px;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        .logo span {
+            color: #e0f2fe;
+        }
+
+        /* 메뉴 리스트 스타일 */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+        }
+
+        /* [3] 갤러리 스타일 - 어둠 속에서 빛나는 액자 */
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-container img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 2px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(56, 189, 248, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: #020c14;
+            opacity: 0.9;
+        }
+
+        .gallery-container img:hover {
+            opacity: 1;
+            transform: translateY(-10px) scale(1.03);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 1), 0 0 25px rgba(56, 189, 248, 0.5);
+        }
+
+        /* 제목 스타일 - 심해 탐사 화면 느낌 */
+        h1.page-title {
+            background: rgba(2, 12, 20, 0.8);
+            padding: 25px 20px;
+            margin-top: 0;
+            color: #e0f2fe;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #0ea5e9;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+        }
+
+        /* 버튼 스타일 - 심해의 야광 생물 느낌 */
+        .btn-back {
+            display: inline-block;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border: 1px solid #38bdf8;
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(135deg, #0369a1, #075985);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.7);
+            border-color: #e0f2fe;
+        }
+    </style>
+
+    <style>
+        /* ========================================================================= */
+        /* 🐾 [새로운 오버라이드] 어두운 심해 디자인을 '따뜻한 애견 카페 + 촘촘 발바닥'으로 완벽 덮어쓰기 */
+        /* ========================================================================= */
+        body {
+            /* 애견 카페의 따뜻한 크림 베이지 배경색 */
+            background-color: #fdfaf5 !important;
+
+            /* 진짜 강아지 발바닥 모양 패턴을 SVG로 촘촘하게 덮기 */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%238b4513' fill-opacity='0.08'%3E%3Cpath d='M12 8.5c-1.5 0-2.5 1-2.5 2.5 0 1.2.8 2 1.8 2.2-1.5 1-3.3 1.8-3.3 4.3 0 2.5 2 4.5 4 4.5s4-2 4-4.5c0-2.5-1.8-3.3-3.3-4.3 1-.2 1.8-1 1.8-2.2 0-1.5-1-2.5-2.5-2.5zm-4.5-1c1.4 0 2.5-1.1 2.5-2.5S8.9 2.5 7.5 2.5 5 3.6 5 5s1.1 2.5 2.5 2.5zm9 0c1.4 0 2.5-1.1 2.5-2.5S17.9 2.5 16.5 2.5 14 3.6 14 5s1.1 2.5 2.5 2.5zM6 10c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm12 0c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z'/%3E%3C/svg%3E") !important;
+
+            /* 패턴 사이즈를 35px로 하여 엄청 작고 빼곡하게 채움 */
+            background-size: 35px 35px !important;
+
+            color: #5d4037 !important;
+            /* 패턴이 너무 많아서 어지러울 수 있으니 애니메이션은 끕니다 */
+            animation: none !important;
+        }
+
+        /* ------------------------------------------------ */
+        /* 헤더, 사진, 버튼의 파란색/검은색 심해 테마 지우기 */
+        /* ------------------------------------------------ */
+
+        /* 헤더를 포근한 크림/브라운 톤으로 */
+        header {
+            background: rgba(253, 250, 245, 0.9) !important;
+            border-bottom: 1px solid rgba(210, 105, 30, 0.2) !important;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1) !important;
+        }
+
+        .logo a {
+            color: #d2691e !important;
+            text-shadow: none !important;
+        }
+
+        .logo span {
+            color: #8b4513 !important;
+        }
+
+        .nav-links a {
+            color: #8b4513 !important;
+            text-shadow: none !important;
+        }
+
+        .nav-links a:hover {
+            color: #d2691e !important;
+        }
+
+        /* 제목을 예쁜 카페 팻말 느낌으로 */
+        h1.page-title {
+            background: #fffaf0 !important;
+            color: #8b4513 !important;
+            border-bottom: 2px dashed #d2691e !important;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.05) !important;
+            text-shadow: none !important;
+        }
+
+        /* 사진 테두리를 까만색에서 뽀얀 흰색/아이보리 액자로 */
+        .gallery-container img {
+            border: 4px solid #ffffff !important;
+            box-shadow: 0 10px 20px rgba(139, 69, 19, 0.1) !important;
+            background-color: #ffffff !important;
+            opacity: 1 !important;
+        }
+
+        .gallery-container img:hover {
+            border-color: #d2691e !important;
+            box-shadow: 0 15px 30px rgba(139, 69, 19, 0.2) !important;
+            transform: translateY(-5px) scale(1.02) !important;
+        }
+
+        /* 돌아가기 버튼을 따뜻한 초콜릿 브라운으로 */
+        .btn-back {
+            background: #8b4513 !important;
+            border: none !important;
+            color: white !important;
+            box-shadow: 0 4px 10px rgba(139, 69, 19, 0.2) !important;
+        }
+
+        .btn-back:hover {
+            background: #5d4037 !important;
+            box-shadow: 0 6px 15px rgba(139, 69, 19, 0.3) !important;
+            transform: translateY(-3px) scale(1.05) !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="container">
+            <h1 class="logo">
+                <a href="index.html">우리<span>활동</span></a>
+            </h1>
+
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="date.html">갤러리</a></li>
+                <li><a href="date.html">데이트 장소</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 class="page-title">홍대 데이트 ❤️</h1>
+
+    <div class="gallery-container">
+        <img src="img9/1.jpeg" alt="사진1">
+        <img src="img9/2.jpeg" alt="사진2">
+        <img src="img9/3.jpeg" alt="사진3">
+        <img src="img9/4.jpeg" alt="사진4">
+        <img src="img9/5.jpeg" alt="사진5">
+        <img src="img9/6.jpeg" alt="사진6" </div>
+    </div>
+
+    <div style="text-align: center; margin: 60px 0;">
+        <a href="date.html" class="btn-back">돌아가기</a>
+    </div>
+
+</body>
+
+</html>

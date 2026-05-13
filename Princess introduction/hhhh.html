@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나의 공주님 | 소개합니다</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* 기본 폰트 설정 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #fdf2f8;
+        }
+
+        /* =========================================
+           ★ 상단 배경 이미지 (왕관 프레임) ★
+           ========================================= */
+        .intro-hero {
+            background-image: url('./img/intro_bg.png');
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-hero h2 {
+            font-family: 'Gaegu', cursive;
+            font-size: 3rem;
+            color: #d6336c;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+            margin: 0;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 10px 30px;
+            border-radius: 50px;
+            backdrop-filter: blur(2px);
+        }
+
+        .intro-hero span {
+            font-size: 1.2rem;
+            background-color: #ff4757;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* -------------------------------------- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: white;
+            width: 900px;
+            max-width: 100%;
+            height: 500px;
+            display: flex;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: popUp 0.3s ease-out;
+        }
+
+        .modal-img-box {
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-text-box {
+            width: 40%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff4757;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ffe4e6;
+            padding-bottom: 10px;
+        }
+
+        .modal-desc {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #888;
+            cursor: pointer;
+            line-height: 1;
+            z-index: 100;
+            transition: 0.3s;
+            background: rgba(255, 255, 255, 0.8);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .close-btn:hover {
+            color: #333;
+            background: white;
+        }
+
+        @keyframes popUp {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .modal-card {
+                flex-direction: column;
+                height: auto;
+                max-height: 85vh;
+            }
+
+            .modal-img-box {
+                width: 100%;
+                height: 300px;
+            }
+
+            .modal-text-box {
+                width: 100%;
+                padding: 25px 20px;
+                flex-grow: 1;
+                overflow-y: auto;
+            }
+
+            .close-btn {
+                top: 10px;
+                right: 10px;
+            }
+
+            .intro-hero {
+                height: 250px;
+            }
+
+            .intro-hero h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* =========================================
+           ✨ [추가된 마법] 공주님 전용 배경 & 효과 ✨
+           ========================================= */
+
+        /* 1. 전체 배경: 우아하게 움직이는 파스텔 핑크 그라데이션 */
+        body {
+            background: linear-gradient(-45deg, #fdf2f8, #ffe4e6, #fce7f3, #fff0f5) !important;
+            background-size: 400% 400% !important;
+            animation: princessBG 15s ease infinite !important;
+            position: relative;
+        }
+
+        @keyframes princessBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 2. 배경에 흩날리는 은은한 하트 패턴 추가 (에러 방지용 안전 코드) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 38 C12 28 5 19 5 12 C5 6 10 2 16 2 C20 2 23 4 25 7 C27 4 30 2 34 2 C40 2 45 6 45 12 C45 19 38 28 25 38 Z' fill='rgba(255, 182, 193, 0.15)'/%3E%3C/svg%3E");
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* 3. 갤러리와 소개글 박스를 투명한 유리처럼 고급스럽게 */
+        section.container,
+        #join-process .container {
+            background: rgba(255, 255, 255, 0.6) !important;
+            border-radius: 25px;
+            padding: 40px !important;
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.1) !important;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* 4. 사진별 소개 박스를 예쁜 편지지 느낌으로 꾸미기 */
+        .step {
+            background: rgba(255, 255, 255, 0.8) !important;
+            border: 2px dashed #ffb6c1 !important;
+            border-radius: 20px !important;
+            padding: 25px 20px !important;
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(255, 105, 180, 0.25) !important;
+            border-style: solid !important;
+            background: #ffffff !important;
+        }
+
+        /* 5. 갤러리 사진들 액자처럼 꾸미기 */
+        .gallery-grid img {
+            border: 5px solid #fff;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4) !important;
+            border-color: #ffe4e6;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <h1 class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">제 여자
+                    <span>사진인데요</span></a></h1>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="date.html">나랑 데이트 목록</a></li>
+                <li><a href="photo.html">인생네컷</a></li>
+                <li><a href="#join-process">소개</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="intro-hero">
+        <span>MY Princess Photo</span>
+        <h2 style="color: rgb(242, 135, 153);">나의 공주(My Girlfriend)</h2>
+    </div>
+
+    <section id="gallery" class="container">
+        <div class="section-title">
+            <h3 style="border-left-color: #e50606;"> 나의 여자친구</h3>
+        </div>
+
+        <div class="gallery-grid">
+            <img src="./img/image.png" data-title="첫 번째 사진"
+                data-desc="카메라를 보는 시선에서 당당함과 귀여움이 동시에 보입니다. 제가 가장 처음 반했던 표정이에요." onclick="showPhoto(this)"
+                style="width: 100%; height: auto; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
+
+            <img src="./img/giir.jpeg" data-title="두 번째 사진"
+                data-desc="츄리닝 입은 모습도 너무 이쁘네요ㅎㅎ 꾸미지 않아도 빛이 나는 사람입니다. 사랑스럽습니다." onclick="showPhoto(this)"
+                style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
+
+            <img src="./img/love.png" data-title="세 번째 사진" data-desc="어떻게 이렇게 이쁘고 귀여울까요? 볼 때마다 심장이 뜁니다. 제 여자친구입니다ㅎㅎ"
+                onclick="showPhoto(this)"
+                style="width: 100%; height: auto; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
+
+            <img src="./img/yoyo.png" data-title="네 번째 사진"
+                data-desc="이번 사진은 제가 제일 좋아하는 사진인데요, 한복 입은 모습이 꼭 명문가 아가씨 같네요ㅎㅎ 단아함 그 자체!" onclick="showPhoto(this)"
+                style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
+        </div>
+    </section>
+
+    <section id="join-process" class="bg-light" style="margin-top: 50px; padding: 50px 0;">
+        <div class="container">
+            <div class="section-title">
+                <h3 style="border-left-color: #ed76bd;">사진별 소개 </h3>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-num" style="color: #f506b2;">01</div>
+                    <h4>첫 번째 사진</h4>
+                    <p>카메라를 보는 시선에서 당당함과 귀여움이 동시에 보입니다</p>
+                </div>
+                <div class="step">
+                    <div class="step-num" style="color: #f506b2;">02</div>
+                    <h4>두 번째 사진</h4>
+                    <p>츄리닝 입은 모습도 너무 이쁘네요ㅎㅎ 사랑스럽습니다</p>
+                </div>
+                <div class="step">
+                    <div class="step-num" style="color: #f506b2;">03</div>
+                    <h4>세 번째 사진</h4>
+                    <p>어떻게 이렇게 이쁘고 귀여울까요? 제 여자친구입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num" style="color: #f506b2;">04</div>
+                    <h4>네 번째 사진</h4>
+                    <p>이번 사진은 제가 제일 좋아하는 사진인데요 한복 입은 모습이 꼭 가문의 아가씨 같네요ㅎㅎ </p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="index.html" class="btn-main"
+                    style="background-color: #f77eef; padding: 12px 30px; border-radius: 30px; color: white; text-decoration: none; font-weight: bold;">돌아가기</a>
+            </div>
+        </div>
+    </section>
+
+    <div id="img-modal" class="modal-overlay" onclick="closeImgModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-img-box">
+                <span class="close-btn" onclick="closeImgModal()">&times;</span>
+                <img id="modal-img" src="">
+            </div>
+
+            <div class="modal-text-box">
+                <h3 id="modal-title" class="modal-title">제목</h3>
+                <p id="modal-desc" class="modal-desc">설명 내용...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPhoto(element) {
+            const modal = document.getElementById('img-modal');
+            const modalImg = document.getElementById('modal-img');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-desc');
+
+            const imgSrc = element.src;
+            const imgTitle = element.getAttribute('data-title');
+            const imgDesc = element.getAttribute('data-desc');
+
+            modalImg.src = imgSrc;
+            modalTitle.innerText = imgTitle;
+            modalDesc.innerText = imgDesc;
+
+            modal.style.display = "flex";
+        }
+
+        function closeImgModal(event) {
+            if (!event || event.target.id === 'img-modal') {
+                document.getElementById('img-modal').style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

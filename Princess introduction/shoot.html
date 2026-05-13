@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두 번째 데이트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <h2 class="logo">
+                <a href="index.html" style="text-decoration:none; color:inherit;">우리<span>활동</span></a>
+            </h2>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="date.html">갤러리</a></li>
+                <li><a href="date.html">데이트 장소</a></li>
+            </ul>
+        </nav>
+    </header>
+    <style>
+        /* [1] 기본 스타일 초기화 (동물원 테마 배경 적용) */
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            /* 밀림 속으로 이어지는 흙길과 수풀 느낌의 그라데이션 */
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 40%, #a7f3d0 70%, #d2b48c 100%);
+            font-family: 'Noto Sans KR', sans-serif;
+            min-height: 100vh;
+        }
+
+        /* [2] 헤더(메뉴바) 스타일 - 나무 질감 추가 */
+        header {
+            background-color: #f7f3e8;
+            /* 따뜻한 크림색 */
+            /* 은은한 나무결 패턴 추가 */
+            background-image: repeating-linear-gradient(45deg, rgba(139, 94, 60, 0.05) 0px, rgba(139, 94, 60, 0.05) 2px, transparent 2px, transparent 4px);
+            height: 70px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #8b5e3c;
+            /* 흙빛 테두리 */
+        }
+
+        /* 메뉴바 안쪽 내용 정렬 */
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 로고 스타일 (갈색 나무 글씨 느낌) */
+        .logo a {
+            text-decoration: none;
+            color: #8b5e3c;
+            font-size: 1.6rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo span {
+            color: #166534;
+            /* 활동 부분은 짙은 녹색 */
+        }
+
+        /* 메뉴 리스트 스타일 */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        /* 마우스 올렸을 때 발자국 효과 추가 */
+        .nav-links a:hover {
+            color: #166534;
+        }
+
+        .nav-links a:hover::before {
+            content: '🐾';
+            /* 발자국 이모지 */
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+        }
+
+
+        /* [3] 갤러리 스타일 (이미지에 나무 액자 틀 추가) */
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            /* 간격 살짝 넓힘 */
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-container img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            /* 더 둥글게 */
+            /* 나무 액자 틀 느낌의 테두리와 그림자 */
+            border: 8px solid #f7f3e8;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), inset 0 0 10px rgba(139, 94, 60, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gallery-container img:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: #8b5e3c;
+            /* 마우스 올리면 진한 갈색으로 틀 변경 */
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 제목 스타일 (나무 표지판 느낌) */
+        h1 {
+            background-color: #a7f3d0;
+            /* 은은한 잎사귀 패턴 추가 */
+            background-image: radial-gradient(#166534 1px, transparent 1px), radial-gradient(#166534 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            padding: 25px;
+            margin-top: 20px;
+            color: #166534;
+            /* 글자색을 짙은 녹색으로 변경 */
+            font-size: 2rem;
+            font-weight: 900;
+            border-radius: 15px;
+            /* 나무 표지판처럼 둥글게 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-shadow: 1px 1px 0 #fff;
+            border: 3px solid #166534;
+            /* 짙은 녹색 테두리 */
+            letter-spacing: -1px;
+        }
+
+        /* 버튼 스타일 (투어 버스 느낌) */
+        .btn-back {
+            display: inline-block;
+            background-color: #f7f3e8;
+            /* 따뜻한 크림색 버스 */
+            color: #8b5e3c;
+            /* 갈색 글씨 */
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid #8b5e3c;
+            /* 흙빛 테두리 */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 버튼 마우스 올렸을 때 빛남 효과 */
+        .btn-back:hover {
+            background-color: #8b5e3c;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(139, 94, 60, 0.3);
+        }
+
+        /* 전체적으로 동물 실루엣 추가 (배경에 은은하게) */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="10" y="50" font-size="20">🐘</text><text x="70" y="20" font-size="20">🦒</text><text x="50" y="80" font-size="20">🦁</text></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="30" y="30" font-size="15">🦓</text><text x="80" y="70" font-size="15">🐒</text></svg>');
+            background-size: 200px 200px, 150px 150px;
+            opacity: 0.03;
+            /* 아주 희미하게 */
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+
+    <h1 style="text-align: center; margin-top: 20px;">동물원 데이트❤️</h1>
+
+
+
+    <div class="gallery-container">
+        <img src="img/111.png" alt="사진1">
+        <img src="img/222.png" alt="사진2">
+        <img src="img/333.png" alt="사진3">
+        <img src="img/444.png" alt="사진4">
+        <img src="img/555.png" alt="사진5">
+        <img src="img/666.png" alt="사진6">
+        <img src="img/777.png" alt="사진7">
+    </div>
+
+    <div style="text-align: center; margin: 60px 0;">
+        <a href="date.html" class="btn-back">돌아가기</a>
+    </div>
+
+
+
+</body>
+
+</html>

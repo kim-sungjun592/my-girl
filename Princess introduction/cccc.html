@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>네 번째 데이트</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <h2 class="logo">
+                <a href="index.html" style="text-decoration:none; color:inherit;">우리<span>활동</span></a>
+            </h2>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="date.html">갤러리</a></li>
+                <li><a href="date.html">데이트 장소</a></li>
+            </ul>
+        </nav>
+    </header>
+    <style>
+        /* [1] 기본 스타일 초기화 (은은한 향기가 퍼지는 듯한 파스텔톤 배경) */
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            /* 부드러운 화이트-더스티 로즈-소프트 라벤더 그라데이션 */
+            background: linear-gradient(135deg, #fdfbfb 0%, #f5ece9 50%, #eef1f5 100%);
+            /* 공기 중에 떠다니는 향수 입자 같은 은은한 빛 효과 */
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(212, 184, 184, 0.15) 0%, transparent 150px),
+                radial-gradient(circle at 80% 70%, rgba(181, 146, 146, 0.1) 0%, transparent 200px);
+            font-family: 'Noto Sans KR', sans-serif;
+            min-height: 100vh;
+            color: #5a4b4b;
+            /* 글자색을 부드러운 차콜 브라운으로 변경 */
+        }
+
+        /* [2] 헤더(메뉴바) 스타일 - 향수병 유리처럼 투명하고 우아하게 */
+        header {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            /* 유리 질감 효과 */
+            height: 70px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(181, 146, 146, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* 메뉴바 안쪽 내용 정렬 */
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* 로고 스타일 (차분하고 세련된 톤) */
+        .logo a {
+            text-decoration: none;
+            color: #5a4b4b;
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #c4a7a7;
+            /* 은은한 핑크 브라운 포인트 */
+        }
+
+        /* 메뉴 리스트 스타일 */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #8c7f7f;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        /* 마우스 올렸을 때 향기가 피어오르는 듯한 부드러운 밑줄 효과 */
+        .nav-links a:hover {
+            color: #b59292;
+        }
+
+        .nav-links a:hover::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #b59292;
+            bottom: -5px;
+            left: 0;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(181, 146, 146, 0.3);
+        }
+
+        /* [3] 갤러리 스타일 (향수 라벨이나 폴라로이드 사진처럼 깔끔하게) */
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            padding: 30px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-container img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            /* 향수병처럼 둥글고 부드럽게 */
+            border: 6px solid rgba(255, 255, 255, 0.8);
+            /* 반투명한 흰색 테두리 */
+            box-shadow: 0 10px 20px rgba(181, 146, 146, 0.15);
+            /* 부드러운 핑크빛 그림자 */
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .gallery-container img:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(181, 146, 146, 0.25);
+            border-color: #fff;
+        }
+
+        /* 제목 스타일 (향수병에 붙은 우아한 라벨 느낌) */
+        h1 {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 15px 45px;
+            margin: 30px auto;
+            color: #7a6f6f;
+            font-weight: 800;
+            letter-spacing: 2px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 20px rgba(181, 146, 146, 0.1);
+            display: inline-block;
+        }
+
+        /* 버튼 스타일 (부드러운 더스티 로즈 색상) */
+        .btn-back {
+            display: inline-block;
+            background: #d4b8b8;
+            /* 차분한 인디핑크/더스티 로즈 */
+            color: white;
+            padding: 12px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 6px 15px rgba(212, 184, 184, 0.4);
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        /* 버튼 마우스 올렸을 때 살짝 진해지며 떠오름 */
+        .btn-back:hover {
+            background: #b59292;
+            box-shadow: 0 8px 20px rgba(181, 146, 146, 0.5);
+            transform: translateY(-3px);
+        }
+    </style>
+
+    <h1 style="text-align: center; margin-top: 20px;">공방 데이트❤️</h1>
+
+
+
+    <div class="gallery-container">
+        <img src="img/111111.png" alt="사진1">
+        <img src="img/222222.png" alt="사진2">
+        <img src="img/333333.png" alt="사진3">
+        <img src="img/444444.png" alt="사진4">
+        <img src="img/555555.png" alt="사진5">
+        <img src="img/666666.png" alt="사진5">
+        <img src="img/777777.png" alt="사진5">
+        <img src="img/888888.png" alt="사진5">
+
+    </div>
+
+    <div style="text-align: center; margin: 60px 0;">
+        <a href="date.html" class="btn-back">돌아가기</a>
+    </div>
+
+
+
+</body>
+
+</html>

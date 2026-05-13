@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리의 일기장</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f5ebe1;
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #333;
+        }
+
+        .diary-header {
+            background: #ffffff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-icon {
+            font-size: 2rem;
+        }
+
+        .header-title h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #555;
+            font-weight: normal;
+        }
+
+        .header-title p {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #222;
+        }
+
+        /* 돌아가기 버튼 */
+        .back-btn {
+            background: white;
+            border: 2px solid #ffb6c1;
+            color: #ff69b4;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .back-btn:hover {
+            background: #ffb6c1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .diary-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            padding-bottom: 50px;
+        }
+
+        .diary-entry {
+            background: white;
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+
+        .diary-entry:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .add-new-box {
+            background: #fff0f5;
+            border: 2px dashed #ffb6c1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 250px;
+            color: #ff69b4;
+        }
+
+        .add-new-box:hover {
+            background: #ffe4e1;
+            border-color: #ff69b4;
+        }
+
+        .card-img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background-color: #fce4ec;
+        }
+
+        .diary-date {
+            color: #999;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+        }
+
+        .diary-content {
+            color: #222;
+            font-weight: bold;
+            font-size: 1.05rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            transition: 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .delete-btn:hover {
+            background: #ef4444;
+        }
+
+        /* 팝업 모달 스타일 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 182, 193, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .real-diary-book {
+            width: 90%;
+            max-width: 450px;
+            height: 550px;
+            background: #fffaf0;
+            border-radius: 5px 25px 25px 5px;
+            box-shadow: inset 15px 0 20px rgba(0, 0, 0, 0.03), 10px 15px 30px rgba(233, 114, 138, 0.4);
+            border-left: 20px solid #ff8da1;
+            padding: 40px 30px;
+            position: relative;
+            background-image: repeating-linear-gradient(transparent, transparent 33px, #fbcfe8 33px, #fbcfe8 34px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .real-diary-book::before {
+            content: '💕';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.6;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            left: -50px;
+            background: white;
+            border: none;
+            font-size: 1.2rem;
+            color: #ff69b4;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .diary-input-date {
+            background: transparent;
+            border: none;
+            font-family: 'Gaegu', cursive;
+            font-size: 1.3rem;
+            color: #d97706;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .diary-input-image-url {
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Gaegu', cursive;
+            font-size: 1.1rem;
+            color: #444;
+            border-bottom: 1px solid #fbcfe8;
+            padding: 5px 0;
+            margin-bottom: 10px;
+        }
+
+        .diary-input-text {
+            width: 100%;
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Gaegu', cursive;
+            font-size: 1.3rem;
+            color: #444;
+            line-height: 34px;
+            resize: none;
+            margin-bottom: 15px;
+        }
+
+        .btn-save {
+            background: #ff8da1;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .btn-save:hover {
+            background: #ff69b4;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="diary-header">
+        <div class="header-left">
+            <div class="header-icon">📖</div>
+            <div class="header-title">
+                <h1>우리의 소중한 기록</h1>
+                <p>The Love Book</p>
+            </div>
+        </div>
+        <button class="back-btn" onclick="location.href='index.html'">🏠 처음으로 돌아가기</button>
+    </div>
+
+    <div class="container">
+        <div class="diary-list">
+
+            <div class="diary-entry add-new-box" onclick="openWriteModal()">
+                <div style="font-size: 3rem; margin-bottom: 10px;">💌</div>
+                <div style="font-weight: bold; font-size: 1.1rem;">새로운 추억<br>기록하기</div>
+            </div>
+
+            <div id="dynamic-diaries-container" style="display: contents;"></div>
+
+            <div class="diary-entry" onclick="openStaticModal(this)">
+                <img src="./img5/1.png" class="card-img" alt="기록 썸네일">
+                <div class="diary-date">2024-03-01</div>
+                <div class="diary-content">우리의 첫 시작 💕 너무너무 행복했던 하루!</div>
+            </div>
+
+            <div class="diary-entry" onclick="openStaticModal(this)">
+                <img src="./img5/2.png" class="card-img" alt="기록 썸네일">
+                <div class="diary-date">2024-03-14</div>
+                <div class="diary-content">화이트데이 데이트 🍬 달콤한 사탕 고마워!</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="diary-modal" class="modal-overlay">
+        <div class="real-diary-book">
+            <button class="close-btn" onclick="closeModal()">✖</button>
+            <input type="date" id="diary-date" class="diary-input-date">
+            <input type="text" id="diary-image-url" class="diary-input-image-url"
+                placeholder="여기에 사진 주소를 적어주세요 (예: ./img5/1.png)">
+            <textarea id="diary-text" class="diary-input-text" placeholder="오늘 우리의 예쁜 하루를 적어주세요! ✨"></textarea>
+            <button class="btn-save" id="save-btn" onclick="saveDiary()">기록 남기기 ✍️</button>
+        </div>
+    </div>
+
+    <script>
+        // 새 글 쓰기 창 열기
+        function openWriteModal() {
+            const modal = document.getElementById('diary-modal');
+            modal.style.display = 'flex';
+            document.getElementById('diary-date').valueAsDate = new Date();
+            document.getElementById('diary-image-url').value = "";
+            document.getElementById('diary-text').value = "";
+            document.getElementById('diary-image-url').style.display = 'block';
+            document.getElementById('diary-text').readOnly = false;
+            document.getElementById('save-btn').style.display = 'block';
+        }
+
+        // 웹에서 쓴 일기 (로컬 스토리지) 읽기 창 열기
+        function openReadModal(id) {
+            let localDiaries = JSON.parse(localStorage.getItem('myLoveDiary')) || [];
+            let diary = localDiaries.find(d => d.id === id);
+
+            if (diary) {
+                const modal = document.getElementById('diary-modal');
+                modal.style.display = 'flex';
+                document.getElementById('diary-date').value = diary.date;
+                document.getElementById('diary-image-url').style.display = 'none';
+                document.getElementById('diary-text').value = diary.content;
+                document.getElementById('diary-text').readOnly = true;
+                document.getElementById('save-btn').style.display = 'none';
+            }
+        }
+
+        // 💡 [신규] 내가 직접 HTML 코드로 만든 박스를 클릭했을 때 열리는 창!
+        function openStaticModal(element) {
+            const modal = document.getElementById('diary-modal');
+            modal.style.display = 'flex';
+
+            // 클릭한 박스 안의 날짜와 내용을 읽어와서 팝업창에 채워줍니다.
+            const dateStr = element.querySelector('.diary-date').innerText;
+            const contentStr = element.querySelector('.diary-content').innerText;
+
+            document.getElementById('diary-date').value = dateStr;
+            document.getElementById('diary-image-url').style.display = 'none';
+            document.getElementById('diary-text').value = contentStr;
+            document.getElementById('diary-text').readOnly = true;
+            document.getElementById('save-btn').style.display = 'none';
+        }
+
+        function closeModal() {
+            document.getElementById('diary-modal').style.display = 'none';
+        }
+
+        // 웹에서 쓰는 일기 저장 (기존 기능 유지)
+        function saveDiary() {
+            const dateInput = document.getElementById('diary-date').value;
+            const textInput = document.getElementById('diary-text').value;
+            const imageUrlInput = document.getElementById('diary-image-url').value;
+
+            if (textInput.trim() === "") {
+                alert("내용을 입력해주세요! 😊");
+                return;
+            }
+
+            let localDiaries = JSON.parse(localStorage.getItem('myLoveDiary')) || [];
+            localDiaries.push({ date: dateInput, content: textInput, id: Date.now(), imageUrl: imageUrlInput });
+            localStorage.setItem('myLoveDiary', JSON.stringify(localDiaries));
+
+            closeModal();
+            renderDynamicDiaries(); // 직접 작성한 박스들이 깨지지 않도록 동적 박스만 업데이트!
+        }
+
+        // 일기 삭제 (로컬 스토리지 일기만 삭제됨)
+        function deleteDiary(id) {
+            if (confirm("정말로 이 소중한 기록을 지우시겠어요? 🥺")) {
+                let localDiaries = JSON.parse(localStorage.getItem('myLoveDiary')) || [];
+                localDiaries = localDiaries.filter(diary => diary.id !== id);
+                localStorage.setItem('myLoveDiary', JSON.stringify(localDiaries));
+                renderDynamicDiaries();
+            }
+        }
+
+        // 로컬 스토리지에 저장된 일기만 화면에 그리는 함수
+        function renderDynamicDiaries() {
+            const container = document.getElementById('dynamic-diaries-container');
+            let localDiaries = JSON.parse(localStorage.getItem('myLoveDiary')) || [];
+            localDiaries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            // 내가 HTML로 적어둔 박스들을 건드리지 않고, 빈 컨테이너에만 덮어씁니다.
+            container.innerHTML = "";
+
+            localDiaries.forEach(diary => {
+                const div = document.createElement('div');
+                div.className = 'diary-entry';
+                div.onclick = function () { openReadModal(diary.id); };
+
+                let imgTag = "";
+                if (diary.imageUrl && diary.imageUrl.trim() !== "") {
+                    imgTag = `<img src="${diary.imageUrl}" class="card-img" alt="기록 썸네일">`;
+                } else {
+                    imgTag = `<div class="card-img"></div>`; // 핑크색 빈 박스
+                }
+
+                // 엑스박스 모양(.)을 날짜 사이에 넣는 작업
+                const formattedDate = diary.date.replace(/-/g, '.');
+
+                div.innerHTML = `
+                    <button class="delete-btn" onclick="event.stopPropagation(); deleteDiary(${diary.id})">✖</button>
+                    ${imgTag}
+                    <div class="diary-date">${diary.date}</div>
+                    <div class="diary-content">${diary.content}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // 페이지가 열리면 한 번 실행
+        window.onload = renderDynamicDiaries;
+    </script>
+</body>
+
+</html>

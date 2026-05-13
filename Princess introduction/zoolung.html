@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아홉 번째 데이트</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* [1] 기본 스타일 초기화 */
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f9f9f9;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        /* [2] 헤더(메뉴바) 스타일 - 여기가 핵심 수정 사항! */
+        header {
+            background: #fff;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            /* 스크롤 내려도 메뉴바 고정 */
+            top: 0;
+            z-index: 100;
+        }
+
+        /* 메뉴바 안쪽 내용 정렬 */
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            /* 양쪽 끝으로 벌리기 */
+            align-items: center;
+            /* 수직 가운데 정렬 */
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+            /* 패딩 포함 크기 계산 */
+        }
+
+        /* 로고 스타일 */
+        .logo a {
+            text-decoration: none;
+            color: #2563eb;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #333;
+        }
+
+        /* 메뉴 리스트 스타일 */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            /* 메뉴 사이 간격 */
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+
+        /* [3] 갤러리 스타일 */
+        .gallery-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-container img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-container img:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 제목 스타일 */
+        h1.page-title {
+            background-color: #0cf33e;
+            /* 요청하신 초록색 배경 */
+            padding: 20px;
+            margin-top: 0;
+            /* 헤더랑 딱 붙게 하려면 0, 띄우려면 숫자 올리기 */
+            color: #fff;
+            /* 글자색 흰색이 더 잘 보일 것 같아 수정 (원하면 #333으로 변경) */
+            margin-bottom: 30px;
+        }
+
+        /* 버튼 스타일 */
+        .btn-back {
+            display: inline-block;
+            background-color: #8b5cf6;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-back:hover {
+            background-color: #7c3aed;
+        }
+    </style>
+
+    <style>
+        /* [4] 서울랜드 데이트 추가 테마 스타일 - 기존 코드 건드리지 않음 */
+        body {
+            /* 야간 놀이공원의 네온과 조명 느낌을 주는 어두운 배경 그라데이션 */
+            background:
+                linear-gradient(rgba(20, 20, 40, 0.85), rgba(10, 10, 20, 0.95)),
+                radial-gradient(circle at 15% 15%, rgba(255, 0, 120, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(0, 200, 255, 0.15) 0%, transparent 50%),
+                #0a0a14 !important;
+            /* 기본 어두운 배경색 */
+            background-size: cover;
+            position: relative;
+        }
+
+        /* 배경 위에 더 짙은 컨페티(꽃가루) 효과 추가 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(#ffdfba 1.5px, transparent 1px),
+                radial-gradient(#baffc9 1.5px, transparent 1px),
+                radial-gradient(#bae1ff 1.5px, transparent 1px),
+                radial-gradient(#ffffba 1.5px, transparent 1px);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px, 0 30px, 30px 0;
+            opacity: 0.15;
+            /* 어두운 배경에 맞춰 투명도를 낮춤 */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 어두운 배경에 맞춰 제목 그림자 효과 조정 */
+        h1.page-title {
+            background-image: linear-gradient(135deg, #0cf33e 0%, #0ab12d 100%);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(12, 243, 62, 0.5);
+            /* 그림자 투명도를 높여 더 선명하게 */
+        }
+
+        /* 이미지와 영상 테두리 및 그림자 효과 조정 */
+        img,
+        video {
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            /* 더 옅은 흰색 테두리 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 0 10px rgba(255, 255, 255, 0.1) !important;
+        }
+
+        /* 돌아가기 버튼 디자인 변경 - 활기찬 주황색 포인트 유지 */
+        .btn-back {
+            background-color: #ff8c42 !important;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #ff7f2b !important;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="container">
+            <h1 class="logo">
+                <a href="index.html">우리<span>활동</span></a>
+            </h1>
+
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="date.html">갤러리</a></li>
+                <li><a href="date.html">데이트 장소</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1 class="page-title">하남 주렁주렁 데이트 ❤️</h1>
+
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 40px 0;"></div>
+    <img style="width: 15%; max-width: 400px;" src="img7/1.jpeg" alt="사진1">
+    <img style="width: 15%; max-width: 400px;" src="img7/2.jpeg" alt="사진2">
+    <img style="width: 15%; max-width: 400px;" src="img7/3.jpeg" alt="사진3">
+    <img style="width: 15%; max-width: 400px;" src="img7/4.jpeg" alt="사진4">
+    <img style="width: 15%; max-width: 400px;" src="img7/5.jpeg" alt="사진5">
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 40px 0;"></div>
+
+    <video style="width: 20%; max-width: 400px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" controls>
+        <source src="./video3/1.mp4" type="video/mp4">
+    </video>
+    <video style="width: 20%; max-width: 400px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" controls>
+        <source src="./video3/2.mp4" type="video/mp4">
+    </video>
+    <video style="width: 20%; max-width: 400px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" controls>
+        <source src="./video3/3.mp4" type="video/mp4">
+    </video>
+    <video style="width: 20%; max-width: 400px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" controls>
+        <source src="./video3/4.mp4" type="video/mp4">
+    </video>
+
+    </div>
+    <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin: 40px 0;"></div>
+
+
+    </div>
+    <div style="text-align: center; margin: 60px 0;">
+        <a href="date.html" class="btn-back">돌아가기</a>
+    </div>
+
+
+
+</body>
+
+</html>

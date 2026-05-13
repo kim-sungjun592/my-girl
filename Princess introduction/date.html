@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아름다운 시절</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* 1. 은은하게 움직이는 로맨틱 배경 (파스텔 핑크 & 코랄) */
+        body {
+            background: linear-gradient(-45deg, #ffe6e6, #fff0f5, #fff5e6, #ffebf0);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 2. 우리 둘만의 시간들 헤더 박스 (이미지 배경) */
+        .detail-header {
+            /* ⬇️ 여기 url(...) 안의 주소를 안전한 이미지 주소로 바꿨습니다! ⬇️ */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./img/main_.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            padding: 60px 30px;
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.3);
+            margin-bottom: 30px;
+            margin-top: 20px;
+            text-align: center;
+            color: white;
+        }
+
+
+        .detail-header .tag {
+            background-color: #ff758c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .detail-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .detail-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* 유리구슬 효과 컨테이너 */
+        #join-process .container {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(255, 182, 193, 0.2);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        /* 3. 갤러리 사진에 마우스를 올리면 둥실 떠오르는 효과 */
+        .gallery-grid a img {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-grid a img:hover {
+            transform: scale(1.05) translateY(-10px);
+            box-shadow: 0 15px 25px rgba(255, 105, 180, 0.4) !important;
+            border-color: #ffb6c1;
+        }
+
+        /* 4. 아래쪽 '데이트 장소들' 박스들 예쁘게 정렬 및 꾸미기 */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            align-items: stretch;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 2px solid #fff0f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .step:hover {
+            transform: translateY(-8px);
+            background: #ffffff;
+            border-color: #ffb6c1;
+            box-shadow: 0 12px 25px rgba(255, 105, 180, 0.2);
+        }
+
+        .step-num {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            color: #d6336c;
+            width: 30px;
+            /* 글씨가 삐져나오지 않게 크기 복구 */
+            height: 30px;
+            line-height: 30px;
+            border-radius: 30%;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(255, 154, 158, 0.4);
+        }
+
+        .step h4 {
+            color: #d6336c;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            word-break: keep-all;
+        }
+
+        .step p {
+            color: #666;
+            margin: 0;
+            line-height: 1.5;
+            word-break: keep-all;
+        }
+
+        h3 {
+            color: #d6336c;
+        }
+
+        .btn-main {
+            background-color: #ff758c;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+        }
+
+        .btn-main:hover {
+            background-color: #ff4757;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container">
+            <h1 class="logo"><a href="index.html" style="text-decoration:none; color:inherit;">우리<span>활동</span></a>
+            </h1>
+            <ul class="nav-links">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="#gallery">갤러리</a></li>
+                <li><a href="hhhh.html">공주님 소개</a></li>
+                <li><a href="photo.html">인생네컷</a></li>
+                <li><a href="#join-process">소개</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="detail-header container">
+        <span class="tag">데이트/목록</span>
+        <h2>우리 둘만의 시간들</h2>
+        <p>엄청 이쁘고 귀여운 우리 둘만의 시간들</p>
+    </div>
+
+    <section id="gallery" class="container">
+        <div class="section-title">
+            <h3>데이트 목록들</h3>
+        </div>
+
+        <div class="gallery-grid"
+            style="display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; padding-bottom: 50px;">
+
+            <a href="fishwe.html">
+                <img src="./img/fishwe.png" alt="잠실 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+
+            <a href="shoot.html">
+                <img src="./img/shoot.png" alt="동물원 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+
+            <a href="paju.html">
+                <img src="./img/pa.png" alt="파주 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+
+            <a href="cccc.html">
+                <img src="./img/111111.png" alt="공방 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+
+            <a href="gapyeong.html">
+                <img src="./img/11111111.png" alt="가평 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="pocheon.html">
+                <img src="./img2/5.png" alt="포천 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="seoulland.html">
+                <img src="./img3/3.png" alt="서울랜드 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="korea.html">
+                <img src="./img4/11.PNG" alt="한국민속촌 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="zoolung.html">
+                <img src="./img7/5.jpeg" alt="하남 주렁주렁 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="jjb.html">
+                <img src="./img6/3.jpeg" alt="찜질방 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="dog.html">
+                <img src="./img8/1.jpeg" alt="애견 카페 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="hong.html">
+                <img src="./img9/1.jpeg" alt="홍대 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+            <a href="lotteworld.html">
+                <img src="./img10/1.jpeg" alt="롯데월드 데이트"
+                    style="width: 300px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+            </a>
+        </div>
+    </section>
+
+    <section id="join-process" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h3>데이트 장소들</h3>
+            </div>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <h4 style="text-align: center;">아쿠아리움 데이트</h4>
+                    <p style="text-align: center;">첫 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <h4 style="text-align: center;">동물원 데이트</h4>
+                    <p style="text-align: center;"> 두번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <h4 style="text-align: center;">파주 데이트</h4>
+                    <p style="text-align: center;"> 세 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">04</div>
+                    <h4 style="text-align: center;">공방 데이트</h4>
+                    <p style="text-align: center;"> 네 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">05</div>
+                    <h4 style="text-align: center;">가평 데이트</h4>
+                    <p style="text-align: center;"> 다섯 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">06</div>
+                    <h4 style="text-align: center;">포천 데이트</h4>
+                    <p style="text-align: center;"> 여섯 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">07</div>
+                    <h4 style="text-align: center;">서울랜드</h4>
+                    <p style="text-align: center;"> 일곱 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">08</div>
+                    <h4 style="text-align: center;">한국민속촌 데이트</h4>
+                    <p style="text-align: center;"> 여덟 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">9</div>
+                    <h4 style="text-align: center;">하남 주렁주렁 데이트</h4>
+                    <p style="text-align: center;"> 아홉 번째 데이트 입니다ㅎㅎ</p>
+
+                </div>
+                <div class="step">
+                    <div class="step-num">10</div>
+                    <h4 style="text-align: center;">찜질방 데이트</h4>
+                    <p style="text-align: center;"> 열 번째 데이트 입니다ㅎㅎ</p>
+
+                </div>
+                <div class="step">
+                    <div class="step-num">11</div>
+                    <h4 style="text-align: center;">애견 카페 데이트</h4>
+                    <p style="text-align: center;"> 열 한 번째 데이트 입니다ㅎㅎ</p>
+
+                </div>
+                <div class="step">
+                    <div class="step-num">12</div>
+                    <h4 style="text-align: center;">홍대 데이트</h4>
+                    <p style="text-align: center;"> 열 두 번째 데이트 입니다ㅎㅎ</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">13</div>
+                    <h4 style="text-align: center;">롯데월드 데이트</h4>
+                    <p style="text-align: center;"> 열 세 번째 데이트 입니다ㅎㅎ</p>
+
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="index.html" class="btn-main">돌아가기</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

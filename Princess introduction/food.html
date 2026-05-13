@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>우리 공주님의 요리 솜씨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 기본 스타일 */
+        body {
+            background-color: #fdf2f8;
+            margin: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #5d4037;
+            padding-bottom: 50px;
+        }
+
+        /* =========================================
+           ✨ 상단 헤더 꾸미기 ✨
+           ========================================= */
+        header {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid rgba(255, 182, 193, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header nav.container {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            height: 65px;
+            max-width: 1200px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-family: 'Gaegu', cursive;
+            font-size: 1.8rem;
+            color: #d6336c;
+            margin: 0;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #ffb6c1;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-toggle-btn {
+            background: white;
+            border: 2px solid #ffb6c1;
+            color: #d6336c;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+        }
+
+        .menu-toggle-btn:hover {
+            background: #ffb6c1;
+            color: white;
+        }
+
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border: 2px solid #ffe4e6;
+            border-radius: 15px;
+            padding: 20px 30px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+            gap: 15px;
+            text-align: center;
+            list-style: none;
+            margin: 0;
+            z-index: 1001;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .nav-links a:hover {
+            color: #d6336c;
+        }
+
+        .nav-links.active {
+            display: flex;
+            animation: dropDownAnim 0.3s ease-out;
+        }
+
+        @keyframes dropDownAnim {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           💖 [food.html 전용] 본문 스타일 💖
+           ========================================= */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .food-hero {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e6 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 5px 20px rgba(251, 113, 133, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .food-hero h1 {
+            font-family: 'Gaegu', cursive;
+            font-size: 3rem;
+            color: #fb7185;
+            margin: 0 0 10px 0;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .food-hero p {
+            font-size: 1.3rem;
+            color: #8b4513;
+            margin: 0;
+        }
+
+        .record-form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 2px solid #ffe4e6;
+            margin-bottom: 50px;
+        }
+
+        .form-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #fb7185;
+            margin-top: 0;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-title::before,
+        .form-title::after {
+            content: '🌸';
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .form-item {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* 사진 업로드 영역 통짜로 쓰기 */
+        .form-item.full-width {
+            flex: 100%;
+        }
+
+        .form-item label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #8b4513;
+            font-size: 0.95rem;
+        }
+
+        input[type="date"],
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ffe4e6;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            color: #5d4037;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input[type="file"] {
+            background: #fffaf0;
+            cursor: pointer;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #fb7185;
+            background-color: #fffaf0;
+            box-shadow: 0 0 10px rgba(251, 113, 133, 0.1);
+        }
+
+        textarea {
+            height: 80px;
+            resize: none;
+        }
+
+        /* 사진 미리보기 박스 */
+        .image-preview-box {
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+            /* 처음엔 숨김 */
+        }
+
+        .image-preview-box img {
+            max-width: 100%;
+            max-height: 250px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px dashed #fb7185;
+            padding: 5px;
+        }
+
+        .submit-btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #fb7185 0%, #ff4757 100%);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(251, 113, 133, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(251, 113, 133, 0.4);
+        }
+
+        /* 목록 섹션 */
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #fb7185;
+            border-bottom: 2px dashed #ffb6c1;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 18px;
+            border: 2px solid #ffe4e6;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+            transition: 0.3s;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .food-card:hover {
+            transform: translateY(-8px);
+            border-color: #fb7185;
+            box-shadow: 0 10px 25px rgba(251, 113, 133, 0.1);
+        }
+
+        /* 카드 썸네일 영역 (사진 or 아이콘) */
+        .card-img-area {
+            height: 180px;
+            background-color: #fff0f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            border-bottom: 2px dashed #ffe4e6;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .food-card:nth-child(2n) .card-img-area.no-img {
+            background-color: #fef3c7;
+        }
+
+        .food-card:nth-child(3n) .card-img-area.no-img {
+            background-color: #e0e7ff;
+        }
+
+        .card-info {
+            padding: 20px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            color: #fb7185;
+            font-weight: bold;
+            background-color: #ffe4e6;
+            padding: 3px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 10px;
+            align-self: center;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #8b4513;
+            margin: 0 0 12px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-comment-box {
+            background-color: #fdfaf5;
+            border-radius: 10px;
+            padding: 15px 10px;
+            font-size: 0.95rem;
+            color: #5d4037;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .card-comment-box::before {
+            content: '“';
+            position: absolute;
+            top: 0px;
+            left: 5px;
+            font-size: 1.5rem;
+            color: #ffb6c1;
+        }
+
+        .card-comment-box::after {
+            content: '”';
+            position: absolute;
+            bottom: -10px;
+            right: 5px;
+            font-size: 1.5rem;
+            color: #ffb6c1;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            color: #ff4757;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            line-height: 1;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.2s;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .food-card:hover .delete-btn {
+            opacity: 1;
+        }
+
+        .delete-btn:hover {
+            background: #ff4757;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .empty-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px 20px;
+            background: white;
+            border-radius: 20px;
+            border: 2px solid #ffe4e6;
+            color: #888;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 600px) {
+            .food-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .form-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-item {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">👑 공주 <span>소개</span> ✨</a>
+            <div class="header-right">
+                <button class="menu-toggle-btn" onclick="toggleNav()">☰ 메뉴</button>
+            </div>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="hhhh.html">공주님 소개</a></li>
+                <li><a href="date.html">데이트 목록</a></li>
+                <li><a href="photo.html">인생네컷</a></li>
+                <li><a href="calendar.html">달력</a></li>
+                <li><a href="bucketlist.html">버킷리스트</a></li>
+                <li><a href="diary.html">우리의 일기장 📖</a></li>
+                <li><a href="food.html" style="color:#d6336c;">요리·도시락 🍱</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="food-hero">
+        <div class="container">
+            <h1>공주님의 요리 솜씨 ❤️</h1>
+            <p>나만을 위한 정성 가득! 사랑의 맛 기록하기 😋</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="record-form-section">
+            <h2 class="form-title">오늘의 사랑 가득 레시피 등록</h2>
+            <div class="form-group">
+                <div class="form-item">
+                    <label for="food-date">📅 먹은 날짜</label>
+                    <input type="date" id="food-date">
+                </div>
+                <div class="form-item">
+                    <label for="food-title">🍱 요리 / 도시락 이름</label>
+                    <input type="text" id="food-title" placeholder="예) 제육볶음 도시락, 하트 계란말이">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-item full-width">
+                    <label for="food-img">📸 자랑하고 싶은 요리 사진 (선택사항)</label>
+                    <input type="file" id="food-img" accept="image/*" onchange="previewImage(event)">
+
+                    <div class="image-preview-box" id="preview-box">
+                        <img id="img-preview-tag" src="" alt="미리보기">
+                    </div>
+                    <input type="hidden" id="compressed-img-data">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-item full-width">
+                    <label for="food-comment">✍️ 나의 솔직 명품 리뷰 (한줄평)</label>
+                    <textarea id="food-comment" placeholder="예) 세상에서 제일 맛있었어! 고마워 공주야 ❤️"></textarea>
+                </div>
+            </div>
+            <div class="submit-btn-container">
+                <button class="submit-btn" onclick="addFoodRecord()">사랑의 기록 등록하기! 💖</button>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">🍱 우리의 맛있는 추억들</h2>
+            <div class="food-grid" id="food-list-wrapper">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'princessFoodRecords';
+        const wrapper = document.getElementById('food-list-wrapper');
+        document.getElementById('food-date').valueAsDate = new Date();
+
+        const foodEmojis = ['🍱', '🥗', '🍝', '🍛', '🥘', '🍲', '🍜', '🍤', '🍣', '🍙', '👨‍🍳', '👩‍🍳'];
+
+        loadFoodRecords();
+
+        // 1. 사진 미리보기 & 압축하기 로직 (용량 최적화)
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    // 가로 길이를 최대 600px로 줄임 (용량 절약 핵심!)
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 600;
+                    let scaleSize = 1;
+
+                    if (img.width > MAX_WIDTH) {
+                        scaleSize = MAX_WIDTH / img.width;
+                    }
+
+                    canvas.width = img.width * scaleSize;
+                    canvas.height = img.height * scaleSize;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // 캔버스 이미지를 JPEG (품질 70%)로 변환
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+
+                    // 미리보기 화면에 표시
+                    document.getElementById('img-preview-tag').src = dataUrl;
+                    document.getElementById('preview-box').style.display = 'block';
+
+                    // 숨겨진 input에 압축된 데이터 저장
+                    document.getElementById('compressed-img-data').value = dataUrl;
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+
+        // 2. 기록 불러오기
+        function loadFoodRecords() {
+            const savedData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            wrapper.innerHTML = "";
+
+            if (savedData.length === 0) {
+                wrapper.innerHTML = `
+                    <div class="empty-message">
+                        아직 등록된 요리 기록이 없어요.<br>
+                        공주님이 해주신 맛있는 요리를 첫 번째로 기록해보세요! 🌸
+                    </div>
+                `;
+                return;
+            }
+
+            savedData.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            savedData.forEach((data) => {
+                let imgAreaHTML = '';
+
+                // 사진이 있으면 사진을, 없으면 랜덤 이모지를 보여줌
+                if (data.image) {
+                    imgAreaHTML = `<div class="card-img-area" style="background-image: url('${data.image}')"></div>`;
+                } else {
+                    const randomEmoji = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+                    imgAreaHTML = `<div class="card-img-area no-img">${randomEmoji}</div>`;
+                }
+
+                const cardHTML = `
+                    <div class="food-card">
+                        <button class="delete-btn" onclick="deleteRecord(${data.id})" title="삭제">&times;</button>
+                        ${imgAreaHTML}
+                        <div class="card-info">
+                            <span class="card-date">${formatDate(data.date)}</span>
+                            <h4 class="card-title" title="${data.title}">${data.title}</h4>
+                            <div class="card-comment-box">
+                                ${data.comment.replace(/\n/g, '<br>')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                wrapper.innerHTML += cardHTML;
+            });
+        }
+
+        // 3. 기록 추가하기
+        function addFoodRecord() {
+            const dateInput = document.getElementById('food-date').value;
+            const titleInput = document.getElementById('food-title').value.trim();
+            const commentInput = document.getElementById('food-comment').value.trim();
+            const imgData = document.getElementById('compressed-img-data').value;
+
+            if (!dateInput || !titleInput || !commentInput) {
+                alert("날짜, 요리 이름, 리뷰를 모두 적어주셔야 기록이 가능해요! 💖");
+                return;
+            }
+
+            const newRecord = {
+                id: Date.now(),
+                date: dateInput,
+                title: titleInput,
+                comment: commentInput,
+                image: imgData // 압축된 사진 데이터 저장
+            };
+
+            let currentData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            currentData.push(newRecord);
+
+            // localStorage 용량 초과 에러 방지 안내
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(currentData));
+            } catch (e) {
+                alert("앗! 브라우저 저장 공간이 가득 찼어요 😢\n기존 사진 기록을 몇 개 지우고 다시 시도해 주세요!");
+                return;
+            }
+
+            // 입력칸 초기화
+            document.getElementById('food-title').value = "";
+            document.getElementById('food-comment').value = "";
+            document.getElementById('food-date').valueAsDate = new Date();
+            document.getElementById('food-img').value = "";
+            document.getElementById('preview-box').style.display = 'none';
+            document.getElementById('compressed-img-data').value = "";
+
+            alert("세상에서 제일 맛있는 기록이 저장되었습니다! 🍱💕");
+            loadFoodRecords();
+        }
+
+        // 4. 기록 삭제하기
+        function deleteRecord(id) {
+            if (!confirm("정말 이 소중한 맛의 기억을 삭제하시겠습니까? 😢")) return;
+
+            let currentData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+            currentData = currentData.filter(record => record.id !== id);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(currentData));
+
+            loadFoodRecords();
+        }
+
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일`;
+        }
+
+        function toggleNav() {
+            const navMenu = document.getElementById('nav-menu');
+            navMenu.classList.toggle('active');
+        }
+
+        window.addEventListener('click', function (e) {
+            const navMenu = document.getElementById('nav-menu');
+            const toggleBtn = document.querySelector('.menu-toggle-btn');
+            if (navMenu.classList.contains('active') && !navMenu.contains(e.target) && e.target !== toggleBtn) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+
+</html>
