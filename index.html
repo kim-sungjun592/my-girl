@@ -21,6 +21,9 @@
            ✨ [UPGRADE] 상단 헤더 꾸미기 ✨
            ========================================= */
         /* 헤더 전체 배경 (유리 질감 + 고정) */
+        /* =========================================
+   ✨ 상단 헤더 꾸미기 ✨
+   ========================================= */
         header {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
@@ -34,12 +37,59 @@
         header nav.container {
             position: relative;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
+            /* 로고를 왼쪽에 고정 */
             align-items: center;
             padding: 10px 20px;
             height: 65px;
             max-width: 1200px;
             margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-family: 'Gaegu', cursive;
+            font-size: 1.8rem;
+            color: #d6336c;
+            margin: 0;
+            text-decoration: none;
+            white-space: nowrap;
+            /* 💡 핵심 1: 화면이 좁아져도 로고 글씨가 두 줄로 안 꺾이게 방지 */
+        }
+
+        .logo span {
+            color: #ffb6c1;
+        }
+
+        .header-right {
+            /* 💡 핵심 2: 메뉴 버튼을 오른쪽 끝에 무조건 고정시킴 */
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-toggle-btn {
+            background: white;
+            border: 2px solid #ffb6c1;
+            color: #d6336c;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+            white-space: nowrap;
+            /* 메뉴 글씨도 줄바꿈 방지 */
+        }
+
+        .menu-toggle-btn:hover {
+            background: #ffb6c1;
+            color: white;
         }
 
         /* 로고 꾸미기 */
@@ -405,6 +455,109 @@
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(251, 113, 133, 0.4);
+        }
+
+        /* =========================================
+           📱 [NEW 추가] 핸드폰 화면 글자 깨짐 방지 코드 📱
+           ========================================= */
+
+        /* 텍스트가 컨테이너 밖으로 나가지 않게 단어 단위로 자연스럽게 끊어줍니다 */
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        span {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        /* 화면 가로폭이 768px 이하(일반적인 스마트폰, 태블릿)일 때만 작동하는 코드입니다 */
+        @media screen and (max-width: 768px) {
+
+            /* 1. 상단 헤더 겹침 방지 (크기 및 여백 축소) */
+            header nav.container {
+                padding: 10px 10px;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .d-day-btn {
+                padding: 4px 10px;
+                font-size: 0.8rem;
+            }
+
+            .menu-toggle-btn {
+                padding: 4px 10px;
+                font-size: 0.8rem;
+            }
+
+            /* 2. 메인 배너(Hero) 폰트 크기 축소 */
+            .hero {
+                padding: 60px 15px;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            /* 3. 과도하게 넓은 고정 패딩 조정 (버튼이 화면 밖으로 나가는 현상 방지) */
+            .diary-view-btn,
+            .food-view-btn {
+                padding: 8px 30px;
+                display: inline-block;
+                width: 70%;
+                box-sizing: border-box;
+            }
+
+            /* 4. 팝업창 내 글자 크기 최적화 */
+            .popup-hero h1 {
+                font-size: 2rem;
+            }
+
+            .popup-hero .heart-anim {
+                font-size: 2.2rem;
+            }
+
+            .bucket-item {
+                font-size: 0.95rem;
+            }
+
+            /* 외부 style.css 에 설정된 그리드가 핸드폰에서 1열로 예쁘게 정렬되도록 안전장치 추가 */
+            .club-grid {
+                display: grid;
+                grid-template-columns: 1fr !important;
+                gap: 20px;
+            }
+        }
+
+        /* 380px 이하의 아주 작은 핸드폰 화면용 안전장치 추가 */
+        @media screen and (max-width: 380px) {
+            .logo {
+                font-size: 1rem;
+            }
+
+            .d-day-btn {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+            }
+
+            .menu-toggle-btn {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+            }
+
+            .diary-view-btn,
+            .food-view-btn {
+                width: 85%;
+            }
         }
     </style>
 </head>
