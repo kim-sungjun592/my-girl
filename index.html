@@ -1,824 +1,1002 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나의 공주님 소개</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
-        /* 기본 스타일 */
-        body {
-            background-color: #fdf2f8;
-            margin: 0;
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-
-        /* =========================================
-           ✨ [UPGRADE] 상단 헤더 꾸미기 ✨
+      /* =========================================
+           🌌 [NEW] 보랏빛 밤하늘 테마 배경
            ========================================= */
-        /* 헤더 전체 배경 (유리 질감 + 고정) */
-        /* =========================================
-   ✨ 상단 헤더 꾸미기 ✨
-   ========================================= */
-        header {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid rgba(255, 182, 193, 0.3);
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+      body {
+        margin: 0;
+        font-family: "Noto Sans KR", sans-serif;
+        color: #f8fafc; /* 어두운 배경에 맞게 글자를 밝게 변경 */
+        background-color: #0b0f19;
+        overflow-x: hidden;
+      }
 
+      /* 1. 움직이는 우주/밤하늘 그라데이션 */
+      .bg-night {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -3;
+        background: linear-gradient(-45deg, #0f0c29, #302b63, #1e1b4b, #24243e);
+        background-size: 400% 400%;
+        animation: gradientMove 15s ease infinite;
+      }
+
+      @keyframes gradientMove {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* 2. 반짝이는 배경 별빛 (Twinkling Stars) */
+      .stars-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        pointer-events: none;
+      }
+
+      .star {
+        position: absolute;
+        background-color: #fff;
+        border-radius: 50%;
+        animation: twinkle infinite ease-in-out;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+          box-shadow:
+            0 0 10px #fff,
+            0 0 20px #c084fc;
+        }
+      }
+
+      /* 3. 별똥별 (Shooting Star) */
+      .shooting-star {
+        position: absolute;
+        width: 150px;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff);
+        top: -20px;
+        right: -20px;
+        transform: rotate(-45deg);
+        animation: shootingStar 6s linear infinite;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .shooting-star::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: -4px;
+        width: 10px;
+        height: 10px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow:
+          0 0 15px #fff,
+          0 0 30px #c084fc;
+      }
+
+      .shooting-star:nth-child(2) {
+        top: 20%;
+        right: -50px;
+        animation-delay: 3s;
+        animation-duration: 8s;
+      }
+      .shooting-star:nth-child(3) {
+        top: 50%;
+        right: -100px;
+        animation-delay: 5s;
+        animation-duration: 7s;
+      }
+
+      @keyframes shootingStar {
+        0% {
+          transform: translate(0, 0) rotate(-45deg);
+          opacity: 1;
+        }
+        20% {
+          transform: translate(-100vw, 100vh) rotate(-45deg);
+          opacity: 0;
+        }
+        100% {
+          transform: translate(-100vw, 100vh) rotate(-45deg);
+          opacity: 0;
+        }
+      }
+
+      /* 4. 위로 떠오르는 빛무리와 파티클 */
+      .floating-particles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        margin: 0;
+        padding: 0;
+      }
+
+      .floating-particles li {
+        position: absolute;
+        display: block;
+        list-style: none;
+        color: rgba(255, 255, 255, 0.6);
+        text-shadow: 0 0 10px rgba(192, 132, 252, 0.8);
+        animation: floatUp infinite linear;
+        bottom: -100px;
+      }
+
+      .floating-particles li:nth-child(1) {
+        left: 10%;
+        font-size: 1.5rem;
+        animation-duration: 12s;
+      }
+      .floating-particles li:nth-child(2) {
+        left: 30%;
+        font-size: 2rem;
+        animation-duration: 15s;
+        animation-delay: 2s;
+      }
+      .floating-particles li:nth-child(3) {
+        left: 50%;
+        font-size: 1rem;
+        animation-duration: 10s;
+        animation-delay: 4s;
+      }
+      .floating-particles li:nth-child(4) {
+        left: 70%;
+        font-size: 2.5rem;
+        animation-duration: 18s;
+        animation-delay: 1s;
+      }
+      .floating-particles li:nth-child(5) {
+        left: 85%;
+        font-size: 1.2rem;
+        animation-duration: 14s;
+        animation-delay: 5s;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 1;
+        }
+        80% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      /* =========================================
+           💎 어두운 배경에 맞춘 다크 글래스모피즘
+           ========================================= */
+      .glass-panel {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      /* =========================================
+           ✨ 상단 헤더
+           ========================================= */
+      header {
+        background: rgba(15, 12, 41, 0.6);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      header nav.container {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 10px 20px;
+        height: 75px;
+        max-width: 1200px;
+        margin: 0 auto;
+        box-sizing: border-box;
+      }
+
+      .logo {
+        font-family: "Gaegu", cursive;
+        font-size: 2.2rem;
+        color: #fff;
+        margin: 0;
+        text-decoration: none;
+        white-space: nowrap;
+        text-shadow: 0 0 10px rgba(192, 132, 252, 0.8);
+      }
+
+      .logo span {
+        color: #fcd34d;
+      } /* 노란/금빛 포인트 */
+
+      .d-day-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      }
+
+      .d-day-btn {
+        cursor: pointer;
+        padding: 8px 22px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        color: #e2e8f0;
+        font-weight: bold;
+        font-family: "Gaegu", cursive;
+        font-size: 1.3rem;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
+        transition: all 0.3s;
+      }
+
+      .d-day-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 25px rgba(192, 132, 252, 0.8);
+        transform: translateY(-2px);
+        color: #fff;
+      }
+
+      .header-right {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+      }
+
+      .menu-toggle-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        white-space: nowrap;
+      }
+
+      .menu-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        right: 20px;
+        background: rgba(30, 27, 75, 0.9);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 20px 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        gap: 15px;
+        text-align: center;
+        list-style: none;
+        margin: 0;
+        z-index: 2000;
+      }
+
+      .nav-links.active {
+        display: flex;
+        animation: dropDownAnim 0.3s forwards;
+      }
+
+      @keyframes dropDownAnim {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #cbd5e1;
+        font-weight: bold;
+        font-size: 1.1rem;
+        transition: 0.3s;
+        display: block;
+        padding: 5px 0;
+      }
+
+      .nav-links a:hover {
+        color: #fcd34d;
+        transform: translateX(-5px);
+      }
+
+      /* =========================================
+           🌌 메인 히어로 배너
+           ========================================= */
+      .hero-container {
+        max-width: 1000px;
+        margin: 50px auto 30px;
+        padding: 0 20px;
+      }
+
+      .hero-banner {
+        border-radius: 35px;
+        padding: 50px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-banner h2 {
+        font-family: "Gaegu", cursive;
+        font-size: 3rem;
+        color: #fff;
+        margin: 0 0 15px 0;
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 0 15px rgba(192, 132, 252, 0.8);
+      }
+
+      .hero-banner p {
+        font-size: 1.2rem;
+        color: #cbd5e1;
+        margin: 0;
+        font-weight: bold;
+        position: relative;
+        z-index: 2;
+      }
+
+      .moon-icon {
+        font-size: 4rem;
+        margin-bottom: 10px;
+        animation: floatMoon 4s ease-in-out infinite;
+        filter: drop-shadow(0 0 20px rgba(252, 211, 77, 0.6));
+      }
+
+      @keyframes floatMoon {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(10deg);
+        }
+      }
+
+      /* =========================================
+           📱 위젯 (Bento) 그리드
+           ========================================= */
+      .widget-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+        max-width: 1000px;
+        margin: 0 auto 80px;
+        padding: 0 20px;
+      }
+
+      .widget-card {
+        border-radius: 30px;
+        padding: 30px 20px;
+        text-decoration: none;
+        color: #f8fafc;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        transition: all 0.4s;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .widget-card:hover {
+        transform: translateY(-10px);
+        box-shadow:
+          0 20px 40px rgba(0, 0, 0, 0.4),
+          inset 0 0 20px rgba(192, 132, 252, 0.2);
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      .span-2 {
+        grid-column: span 2;
+      }
+      .span-row-2 {
+        grid-row: span 2;
+      }
+
+      .widget-icon {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+        transition: 0.4s;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+      }
+
+      .widget-card:hover .widget-icon {
+        transform: scale(1.15);
+        filter: drop-shadow(0 0 20px rgba(252, 211, 77, 0.8));
+      }
+
+      .widget-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 8px;
+        font-family: "Noto Sans KR", sans-serif;
+        text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+      }
+
+      .widget-desc {
+        font-size: 1rem;
+        color: #94a3b8;
+        word-break: keep-all;
+      }
+
+      /* 사진 카드 오버레이 */
+      .img-widget {
+        padding: 0;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        min-height: 220px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .img-widget::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(15, 12, 41, 0.9) 0%,
+          rgba(0, 0, 0, 0) 70%
+        );
+        border-radius: 25px;
+        z-index: 1;
+      }
+
+      .img-widget .widget-content {
+        position: absolute;
+        bottom: 25px;
+        left: 25px;
+        text-align: left;
+        z-index: 2;
+      }
+      .img-widget .widget-title {
+        color: #fff;
+      }
+      .img-widget .widget-desc {
+        color: #cbd5e1;
+      }
+
+      /* =========================================
+           🌌 다크 테마 팝업 모달
+           ========================================= */
+      .love-modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .love-modal-content {
+        background: rgba(15, 23, 42, 0.95);
+        width: 90%;
+        max-width: 500px;
+        border-radius: 30px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: slideUp 0.4s;
+        color: #f8fafc;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px) scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+      }
+
+      .close-love-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 2rem;
+        color: #94a3b8;
+        cursor: pointer;
+        z-index: 10;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.3s;
+      }
+
+      .close-love-btn:hover {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        transform: rotate(90deg);
+      }
+
+      .popup-hero {
+        text-align: center;
+        padding: 40px 20px 30px;
+        background: linear-gradient(
+          135deg,
+          rgba(48, 43, 99, 0.8) 0%,
+          rgba(36, 36, 62, 0.8) 100%
+        );
+        border-radius: 0 0 30px 30px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .popup-hero h1 {
+        font-family: "Gaegu", cursive;
+        font-size: 3.5rem;
+        margin: 10px 0;
+        color: #fcd34d;
+        text-shadow: 0 0 15px rgba(252, 211, 77, 0.5);
+      }
+      .heart-anim {
+        font-size: 3rem;
+        animation: heartbeat 1s infinite alternate;
+        filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        100% {
+          transform: scale(1.2);
+        }
+      }
+
+      .popup-bucket {
+        padding: 30px;
+      }
+      .bucket-item {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.2s;
+        color: #cbd5e1;
+      }
+      .bucket-item:hover {
+        transform: translateX(5px);
+        color: #fff;
+      }
+      .check-box {
+        width: 22px;
+        height: 22px;
+        border: 2px solid #c084fc;
+        border-radius: 50%;
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: transparent;
+        font-size: 12px;
+        font-weight: bold;
+        transition: 0.3s;
+      }
+      .bucket-item.done .check-box {
+        background-color: #c084fc;
+        color: white;
+        border-color: #c084fc;
+        box-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+      }
+      .bucket-item.done span {
+        text-decoration: line-through;
+        color: #64748b;
+      }
+
+      /* =========================================
+           📱 반응형
+           ========================================= */
+      @media screen and (max-width: 900px) {
+        .widget-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+        }
+        .span-row-2 {
+          grid-row: auto;
+        }
+        .span-2 {
+          grid-column: span 1;
+        }
+        .mobile-span-2 {
+          grid-column: span 2;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
         header nav.container {
-            position: relative;
-            display: flex;
-            justify-content: flex-start;
-            /* 로고를 왼쪽에 고정 */
-            align-items: center;
-            padding: 10px 20px;
-            height: 65px;
-            max-width: 1200px;
-            margin: 0 auto;
-            box-sizing: border-box;
+          height: 65px;
+          padding: 10px 15px;
         }
-
         .logo {
-            font-family: 'Gaegu', cursive;
-            font-size: 1.8rem;
-            color: #d6336c;
-            margin: 0;
-            text-decoration: none;
-            white-space: nowrap;
-            /* 💡 핵심 1: 화면이 좁아져도 로고 글씨가 두 줄로 안 꺾이게 방지 */
+          font-size: 1.5rem;
         }
-
-        .logo span {
-            color: #ffb6c1;
-        }
-
-        .header-right {
-            /* 💡 핵심 2: 메뉴 버튼을 오른쪽 끝에 무조건 고정시킴 */
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-toggle-btn {
-            background: white;
-            border: 2px solid #ffb6c1;
-            color: #d6336c;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
-            white-space: nowrap;
-            /* 메뉴 글씨도 줄바꿈 방지 */
-        }
-
-        .menu-toggle-btn:hover {
-            background: #ffb6c1;
-            color: white;
-        }
-
-        /* 로고 꾸미기 */
-        .logo {
-            font-family: 'Gaegu', cursive;
-            font-size: 1.8rem;
-            color: #d6336c;
-            margin: 0;
-        }
-
-        .logo span {
-            color: #ffb6c1;
-        }
-
-        /* 정중앙 D-day */
-        .d-day-center {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            white-space: nowrap;
-        }
-
-        /* D-day 버튼 */
         .d-day-btn {
-            cursor: pointer;
-            padding: 6px 18px;
-            border-radius: 25px;
-            transition: 0.3s;
-            background-color: white;
-            border: 2px solid #ff4757;
-            color: #ff4757;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.15);
-            animation: softPulse 2s infinite;
+          padding: 6px 14px;
+          font-size: 1rem;
         }
 
-        .d-day-btn:hover {
-            background-color: #ff4757;
-            color: white;
-            transform: scale(1.05);
-            animation: none;
+        .hero-banner h2 {
+          font-size: 2rem;
+        }
+        .moon-icon {
+          font-size: 3rem;
         }
 
-        @keyframes softPulse {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+        .widget-grid {
+          grid-template-columns: 1fr;
+          gap: 15px;
+          padding: 0 15px;
         }
-
-        /* 우측 햄버거 메뉴 버튼 */
-        .header-right {
-            display: flex;
-            align-items: center;
+        .span-2,
+        .mobile-span-2 {
+          grid-column: span 1;
         }
-
-        .menu-toggle-btn {
-            display: block;
-            background: white;
-            border: 2px solid #ffb6c1;
-            color: #d6336c;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: bold;
-            font-size: 0.95rem;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+        .img-widget {
+          min-height: 180px;
         }
-
-        .menu-toggle-btn:hover {
-            background: #ffb6c1;
-            color: white;
-        }
-
-        /* 드롭다운 메뉴 리스트 */
-        .nav-links {
-            display: none;
-            flex-direction: column;
-            position: absolute;
-            top: 70px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border: 2px solid #ffe4e6;
-            border-radius: 15px;
-            padding: 20px 30px;
-            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
-            gap: 15px;
-            text-align: center;
-            list-style: none;
-            margin: 0;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        .nav-links::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .nav-links::-webkit-scrollbar-thumb {
-            background: #ffb6c1;
-            border-radius: 10px;
-        }
-
-        .nav-links::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: 0.3s;
-            display: block;
-        }
-
-        .nav-links a:hover {
-            color: #d6336c;
-            transform: scale(1.05);
-        }
-
-        .nav-links.active {
-            display: flex;
-            animation: dropDownAnim 0.3s ease-out;
-        }
-
-        @keyframes dropDownAnim {
-            from {
-                opacity: 0;
-                transform: translateY(-15px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* =========================================
-           ★ 기존 디자인 유지 ★
-           ========================================= */
-        .hero {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('./img/main_bg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            padding: 100px 20px;
-            text-align: center;
-            color: white;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            border-radius: 0 0 30px 30px;
-            margin-bottom: 40px;
-            margin-top: -2px;
-        }
-
-        .hero h2 {
-            font-family: 'Gaegu', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-        }
-
-        .love-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .love-modal-content {
-            background: #fdf2f8;
-            width: 90%;
-            max-width: 600px;
-            max-height: 80vh;
-            border-radius: 20px;
-            position: relative;
-            overflow-y: auto;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            animation: slideUp 0.3s ease-out;
-            padding-bottom: 30px;
-        }
-
-        .close-love-btn {
-            position: sticky;
-            top: 15px;
-            float: right;
-            margin-right: 20px;
-            margin-top: 15px;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #555;
-            cursor: pointer;
-            z-index: 10000;
-            line-height: 1;
-            transition: 0.2s;
-            background: rgba(255, 255, 255, 0.5);
-            width: 40px;
-            height: 40px;
-            text-align: center;
-            border-radius: 50%;
-        }
-
-        .close-love-btn:hover {
-            color: #ff4757;
-            background: white;
-        }
-
-        .popup-hero {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            color: white;
-            border-radius: 0 0 40px 40px;
-            margin-bottom: 20px;
-            clear: both;
-        }
-
-        .popup-hero h1 {
-            font-size: 2.5rem;
-            margin: 10px 0;
-        }
-
-        .popup-hero .heart-anim {
-            font-size: 3rem;
-            animation: heartbeat 1.5s infinite;
-            display: inline-block;
-        }
-
-        .popup-bucket {
-            padding: 0 30px;
-        }
-
-        .bucket-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #ddd;
-            font-size: 1.1rem;
-            cursor: pointer;
-        }
-
-        .check-box {
-            width: 24px;
-            height: 24px;
-            border: 2px solid #ff4757;
-            border-radius: 50%;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .bucket-item.done .check-box {
-            background-color: #ff4757;
-        }
-
-        .bucket-item.done span {
-            text-decoration: line-through;
-            color: #bbb;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes heartbeat {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .bucket-view-btn {
-            background-color: #e0e7ff;
-            color: #4facfe;
-            transition: all 0.3s ease;
-            display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-
-        .bucket-view-btn:hover {
-            background-color: #4facfe;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
-        }
-
-        .diary-view-btn {
-            background-color: #fef3c7;
-            color: #d97706;
-            padding: 5px 90px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            font-weight: bold;
-        }
-
-        .diary-view-btn:hover {
-            background-color: #f59e0b;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
-        }
-
-        /* ✨ 요리/도시락 전용 버튼 스타일 추가 ✨ */
-        .food-view-btn {
-            background-color: #ffe4e6;
-            color: #fb7185;
-            padding: 5px 85px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            font-weight: bold;
-        }
-
-        .food-view-btn:hover {
-            background-color: #fb7185;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(251, 113, 133, 0.4);
-        }
-
-        /* =========================================
-           📱 [NEW 추가] 핸드폰 화면 글자 깨짐 방지 코드 📱
-           ========================================= */
-
-        /* 텍스트가 컨테이너 밖으로 나가지 않게 단어 단위로 자연스럽게 끊어줍니다 */
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        p,
-        span {
-            word-break: keep-all;
-            overflow-wrap: break-word;
-        }
-
-        /* 화면 가로폭이 768px 이하(일반적인 스마트폰, 태블릿)일 때만 작동하는 코드입니다 */
-        @media screen and (max-width: 768px) {
-
-            /* 1. 상단 헤더 겹침 방지 (크기 및 여백 축소) */
-            header nav.container {
-                padding: 10px 10px;
-            }
-
-            .logo {
-                font-size: 1.2rem;
-            }
-
-            .d-day-btn {
-                padding: 4px 10px;
-                font-size: 0.8rem;
-            }
-
-            .menu-toggle-btn {
-                padding: 4px 10px;
-                font-size: 0.8rem;
-            }
-
-            /* 2. 메인 배너(Hero) 폰트 크기 축소 */
-            .hero {
-                padding: 60px 15px;
-            }
-
-            .hero h2 {
-                font-size: 1.8rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            /* 3. 과도하게 넓은 고정 패딩 조정 (버튼이 화면 밖으로 나가는 현상 방지) */
-            .diary-view-btn,
-            .food-view-btn {
-                padding: 8px 30px;
-                display: inline-block;
-                width: 70%;
-                box-sizing: border-box;
-            }
-
-            /* 4. 팝업창 내 글자 크기 최적화 */
-            .popup-hero h1 {
-                font-size: 2rem;
-            }
-
-            .popup-hero .heart-anim {
-                font-size: 2.2rem;
-            }
-
-            .bucket-item {
-                font-size: 0.95rem;
-            }
-
-            /* 외부 style.css 에 설정된 그리드가 핸드폰에서 1열로 예쁘게 정렬되도록 안전장치 추가 */
-            .club-grid {
-                display: grid;
-                grid-template-columns: 1fr !important;
-                gap: 20px;
-            }
-        }
-
-        /* 380px 이하의 아주 작은 핸드폰 화면용 안전장치 추가 */
-        @media screen and (max-width: 380px) {
-            .logo {
-                font-size: 1rem;
-            }
-
-            .d-day-btn {
-                font-size: 0.75rem;
-                padding: 4px 8px;
-            }
-
-            .menu-toggle-btn {
-                font-size: 0.75rem;
-                padding: 4px 8px;
-            }
-
-            .diary-view-btn,
-            .food-view-btn {
-                width: 85%;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <!-- 🌌 배경 및 별 애니메이션 요소들 -->
+    <div class="bg-night"></div>
+
+    <!-- 별똥별 -->
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
+    <!-- 반짝이는 배경 별 (랜덤 위치 생성을 위해 JS로 추가함) -->
+    <div class="stars-container" id="stars-container"></div>
+
+    <!-- 떠오르는 파티클 -->
+    <ul class="floating-particles">
+      <li>✨</li>
+      <li>💫</li>
+      <li>🌙</li>
+      <li>🤍</li>
+      <li>✨</li>
+    </ul>
 
     <header>
-        <nav class="container">
-            <h1 class="logo">👑 공주 <span>소개</span> ✨</h1>
+      <nav class="container">
+        <h1 class="logo">🌙 공주 <span>소개</span> ✨</h1>
 
-            <div class="d-day-center">
-                <div class="d-day-btn" onclick="openLovePopup()">
-                    🥳 우리 사귄 지 <span id="header-love-day">0</span>일 🥳
-                </div>
-            </div>
+        <div class="d-day-center">
+          <button class="d-day-btn" onclick="openLovePopup()">
+            🥳 D+<span id="header-love-day">0</span>
+          </button>
+        </div>
 
-            <div class="header-right">
-                <button class="menu-toggle-btn" onclick="toggleNav()">
-                    ☰ 메뉴
-                </button>
-            </div>
+        <div class="header-right">
+          <button class="menu-toggle-btn" onclick="toggleNav()">☰ 메뉴</button>
+        </div>
 
-            <ul class="nav-links" id="nav-menu">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="hhhh.html">공주님 소개</a></li>
-                <li><a href="date.html">데이트 목록</a></li>
-                <li><a href="photo.html">인생네컷</a></li>
-                <li><a href="calendar.html">달력</a></li>
-                <li><a href="bucketlist.html">버킷리스트</a></li>
-                <li><a href="diary.html">우리의 일기장 📖</a></li>
-                <li><a href="food.html">요리·도시락 🍱</a></li>
-            </ul>
-        </nav>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="hhhh.html">공주님 소개</a></li>
+          <li><a href="date.html">데이트 목록</a></li>
+          <li><a href="photo.html">인생네컷</a></li>
+          <li><a href="calendar.html">달력</a></li>
+          <li><a href="bucketlist.html">버킷리스트</a></li>
+          <li><a href="diary.html">우리의 일기장 📖</a></li>
+          <li><a href="food.html">요리·도시락 🍱</a></li>
+        </ul>
+      </nav>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h2>❤️세상에서 제일 이쁘고 귀여운 나의 공주❤️</h2>
-            <p>👸🏻</p>
-        </div>
+    <section class="hero-container">
+      <div class="hero-banner glass-panel">
+        <div class="moon-icon">💜</div>
+        <h2>나의 공주님</h2>
+        <p>우리가 함께 빛나는 소중한 시간들 ✨</p>
+      </div>
     </section>
 
-    <section id="club-list" class="container">
-        <div class="section-title">
-            <h3>공주님 소개</h3>
+    <!-- 다크 유리 위젯 그리드 -->
+    <section class="widget-grid">
+      <a
+        href="hhhh.html"
+        class="widget-card img-widget span-2 mobile-span-2"
+        style="background-image: url(&quot;./img/image.png&quot;)"
+      >
+        <div class="widget-content">
+          <div class="widget-title">👑 나의 공주님</div>
+          <div class="widget-desc">세상에서 제일 사랑스러운 사람</div>
         </div>
-        <div class="club-grid">
+      </a>
 
-            <div class="club-card">
-                <div class="club-img" style="background-image: url('./img/image.png')"></div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag">소개</span>
-                    </div>
-                    <h4 style="text-align: center;">엄청 이뻐요</h4>
-                    <p style="text-align: center;">나의 공주를 소개합니다</p>
-                    <a href="hhhh.html" class="btn-detail">자세히 보기</a>
-                </div>
-            </div>
+      <a href="calendar.html" class="widget-card glass-panel">
+        <div class="widget-icon">📅</div>
+        <div class="widget-title">기념일 달력</div>
+        <div class="widget-desc">별빛처럼 수놓은 D-day</div>
+      </a>
 
-            <div class="club-card">
-                <div class="club-img" style="background-image: url('./img/hhhh.png')"></div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag">데이트 목록</span>
-                    </div>
-                    <h4 style="text-align: center;">데이트 장소 목록들</h4>
-                    <p style="text-align: center;">우리의 아름다운 데이트 장소들</p>
-                    <a href="date.html" class="btn-detail">자세히 보기</a>
-                </div>
-            </div>
+      <a href="bucketlist.html" class="widget-card glass-panel">
+        <div class="widget-icon">📝</div>
+        <div class="widget-title">버킷리스트</div>
+        <div class="widget-desc">함께 이루고픈 꿈</div>
+      </a>
 
-            <div class="photo-card">
-                <div class="club-img" style="background-image: url('./img/phto.png')"></div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag">인생네컷</span>
-                    </div>
-                    <h4 style="text-align: center;">인생네컷</h4>
-                    <p style="text-align: center;">저장소</p>
-                    <a href="photo.html" class="btn-detail">자세히 보기</a>
-                </div>
-            </div>
-
-            <a href="calendar.html" class="photo-card card-link">
-                <div class="club-img"
-                    style="background-color: #ffe0e6; display:flex; align-items:center; justify-content:center; font-size:3rem;">
-                    📅</div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag">달력</span>
-                    </div>
-                    <h4 style="text-align: center;">우리 달력</h4>
-                    <p style="text-align: center;">기념일 기록</p>
-
-                    <div style="text-align: center;">
-                        <span class="calendar-view-btn" style="text-align: center; margin-top: 15px;">기록하기</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="bucketlist.html" class="photo-card card-link">
-                <div class="club-img"
-                    style="background-color: #e0e7ff; display:flex; align-items:center; justify-content:center; font-size:3rem;">
-                    📝</div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag" style="background-color: #96c1e6;">버킷리스트</span>
-                    </div>
-                    <h4 style="text-align: center;">우리의 소원</h4>
-                    <p style="text-align: center;">전체 목록 보러가기</p>
-                    <div style="text-align: center;">
-                        <span class="btn-detail bucket-view-btn">목록 보기</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="diary.html" class="photo-card card-link">
-                <div class="club-img"
-                    style="background-color: #fef3c7; display:flex; align-items:center; justify-content:center; font-size:3rem;">
-                    📖</div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag" style="background-color: #fcd34d; color: #fff;">일기장</span>
-                    </div>
-                    <h4 style="text-align: center;">우리의 일기장</h4>
-                    <p style="text-align: center;">모든 순간을 기록해요</p>
-
-                    <div style="text-align: center; margin-top: 15px;">
-                        <span class="diary-view-btn">일기장 펼치기</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="food.html" class="photo-card card-link">
-                <div class="club-img"
-                    style="background-color: #fff0f5; display:flex; align-items:center; justify-content:center; font-size:3.5rem;">
-                    🍱</div>
-                <div class="club-info">
-                    <div class="card-container" style="text-align: center;">
-                        <span class="tag" style="background-color: #ffb6c1; color: #fff;">요리·도시락</span>
-                    </div>
-                    <h4 style="text-align: center;">공주님의 요리 솜씨</h4>
-                    <p style="text-align: center;">정성 가득! 사랑의 맛 기록하기</p>
-
-                    <div style="text-align: center; margin-top: 15px;">
-                        <span class="food-view-btn">맛있게 먹기 😋</span>
-                    </div>
-                </div>
-            </a>
-
+      <a
+        href="photo.html"
+        class="widget-card img-widget span-row-2"
+        style="
+          background-image: url(&quot;./img/phto.png&quot;);
+          min-height: 320px;
+        "
+      >
+        <div class="widget-content">
+          <div class="widget-title">📸 인생네컷</div>
+          <div class="widget-desc">네 컷에 담은 빛나는 순간</div>
         </div>
+      </a>
+
+      <a href="date.html" class="widget-card span-2 mobile-span-2 glass-panel">
+        <div class="widget-icon">🚗</div>
+        <div class="widget-title">우리의 데이트 코스</div>
+        <div class="widget-desc">발길이 닿았던 예쁜 장소들</div>
+      </a>
+
+      <a href="diary.html" class="widget-card glass-panel">
+        <div class="widget-icon">📖</div>
+        <div class="widget-title">비밀 일기장</div>
+        <div class="widget-desc">매일매일 기록하기</div>
+      </a>
+
+      <a href="food.html" class="widget-card glass-panel">
+        <div class="widget-icon">🍱</div>
+        <div class="widget-title">사랑의 도시락</div>
+        <div class="widget-desc">정성 듬뿍 레시피</div>
+      </a>
     </section>
 
+    <!-- 팝업 모달 -->
     <div id="love-modal" class="love-modal-overlay">
-        <div class="love-modal-content">
-            <div class="close-love-btn" onclick="closeLovePopup()">&times;</div>
-            <div class="popup-hero">
-                <h2>우리가 사랑한 지</h2>
-                <div class="heart-anim">❤️</div>
-                <h1 id="popup-love-day">Calculating...</h1>
-                <p>앞으로도 예쁘게 사랑하자</p>
-                <div style="margin-top:10px;">
-                    <span onclick="setStartDate()"
-                        style="cursor:pointer; font-size:0.9rem; text-decoration:underline;">날짜 수정</span>
-                </div>
-            </div>
-            <div class="popup-bucket">
-                <h3 style="text-align:center; color:#ff4757; margin-bottom:20px;">✨ 버킷리스트 요약 ✨</h3>
-                <ul class="bucket-list">
-                    <li class="bucket-item" onclick="toggleBucket(this, 0)">
-                        <div class="check-box">✔</div> <span>같이 롯데월드 가서 교복 데이트</span>
-                    </li>
-                    <li class="bucket-item" onclick="toggleBucket(this, 1)">
-                        <div class="check-box">✔</div> <span>제주도 푸른 밤 여행하기</span>
-                    </li>
-                    <li class="bucket-item" onclick="toggleBucket(this, 2)">
-                        <div class="check-box">✔</div> <span>서로 도시락 싸주기</span>
-                    </li>
-                    <li class="bucket-item" onclick="toggleBucket(this, 3)">
-                        <div class="check-box">✔</div> <span>1주년 기념 이미지 사진 찍기</span>
-                    </li>
-                    <li class="bucket-item" onclick="toggleBucket(this, 4)">
-                        <div class="check-box">✔</div> <span>커플링 맞추기</span>
-                    </li>
-                </ul>
-                <div style="text-align:center; margin-top:20px;">
-                    <a href="bucketlist.html" class="btn-detail" style="background:#ff4757; color:white;">전체 목록 보기</a>
-                </div>
-            </div>
+      <div class="love-modal-content">
+        <div class="close-love-btn" onclick="closeLovePopup()">&times;</div>
+        <div class="popup-hero">
+          <h2 style="margin: 0; color: #cbd5e1; font-size: 1.2rem">
+            우리가 사랑한 지
+          </h2>
+          <div class="heart-anim">💜</div>
+          <h1 id="popup-love-day">Calculating...</h1>
+          <p style="margin: 0; color: #fff">앞으로도 예쁘게 사랑하자</p>
+          <div style="margin-top: 15px">
+            <span
+              onclick="setStartDate()"
+              style="
+                cursor: pointer;
+                font-size: 0.9rem;
+                text-decoration: underline;
+                color: #94a3b8;
+              "
+              >시작일 수정하기</span
+            >
+          </div>
         </div>
+        <div class="popup-bucket">
+          <h3
+            style="
+              text-align: center;
+              color: #c084fc;
+              margin-top: 0;
+              margin-bottom: 20px;
+              text-shadow: 0 0 5px rgba(192, 132, 252, 0.4);
+            "
+          >
+            ✨ 핵심 버킷리스트 ✨
+          </h3>
+          <ul class="bucket-list" style="padding: 0; margin: 0">
+            <li class="bucket-item" onclick="toggleBucket(this, 0)">
+              <div class="check-box">✔</div>
+              <span>같이 롯데월드 가서 교복 데이트</span>
+            </li>
+            <li class="bucket-item" onclick="toggleBucket(this, 1)">
+              <div class="check-box">✔</div>
+              <span>제주도 밤바다 보러가기</span>
+            </li>
+            <li class="bucket-item" onclick="toggleBucket(this, 2)">
+              <div class="check-box">✔</div>
+              <span>서로 도시락 싸주기</span>
+            </li>
+            <li class="bucket-item" onclick="toggleBucket(this, 3)">
+              <div class="check-box">✔</div>
+              <span>기념일 스냅 사진 찍기</span>
+            </li>
+            <li class="bucket-item" onclick="toggleBucket(this, 4)">
+              <div class="check-box">✔</div>
+              <span>커플링 맞추기</span>
+            </li>
+          </ul>
+          <div style="text-align: center; margin-top: 25px">
+            <a
+              href="bucketlist.html"
+              style="
+                display: inline-block;
+                padding: 10px 30px;
+                background: linear-gradient(45deg, #c084fc, #8b5cf6);
+                color: white;
+                text-decoration: none;
+                border-radius: 30px;
+                font-weight: bold;
+                box-shadow: 0 0 15px rgba(192, 132, 252, 0.5);
+                transition: 0.3s;
+              "
+              >전체 목록 보기</a
+            >
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
-        let savedDate = localStorage.getItem('loveStartDate');
-        if (!savedDate) savedDate = "2026-01-01";
-
-        function updateDday() {
-            const startDate = new Date(savedDate);
-            const today = new Date();
-            const timeDiff = today.getTime() - startDate.getTime();
-            const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 1;
-            document.getElementById("header-love-day").innerText = daysDiff;
-            document.getElementById("popup-love-day").innerText = "+ " + daysDiff + "일";
+      // 배경에 별 생성하기 (JS로 랜덤 생성)
+      function createStars() {
+        const container = document.getElementById("stars-container");
+        for (let i = 0; i < 50; i++) {
+          let star = document.createElement("div");
+          star.className = "star";
+          star.style.width = Math.random() * 3 + "px";
+          star.style.height = star.style.width;
+          star.style.left = Math.random() * 100 + "vw";
+          star.style.top = Math.random() * 100 + "vh";
+          star.style.animationDuration = Math.random() * 3 + 2 + "s";
+          star.style.animationDelay = Math.random() * 2 + "s";
+          container.appendChild(star);
         }
+      }
 
-        function setStartDate() {
-            const input = prompt("사귄 날짜를 입력해주세요 (YYYY-MM-DD)", savedDate);
-            if (input) {
-                localStorage.setItem('loveStartDate', input);
-                savedDate = input;
-                updateDday();
-                alert("기념일이 저장되었습니다! 💖");
-            }
+      // D-day 계산
+      let savedDate = localStorage.getItem("loveStartDate");
+      if (!savedDate) savedDate = "2026-01-01";
+
+      function updateDday() {
+        const startDate = new Date(savedDate);
+        const today = new Date();
+        const timeDiff = today.getTime() - startDate.getTime();
+        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 1;
+        document.getElementById("header-love-day").innerText = daysDiff;
+        document.getElementById("popup-love-day").innerText = daysDiff + "일째";
+      }
+
+      function setStartDate() {
+        const input = prompt(
+          "사귄 날짜를 입력해주세요 (예: 2026-01-01)",
+          savedDate,
+        );
+        if (input) {
+          localStorage.setItem("loveStartDate", input);
+          savedDate = input;
+          updateDday();
+          alert("기념일이 예쁘게 저장되었습니다! 🌌");
         }
+      }
 
-        function resetAllData() {
-            if (confirm("모든 버킷리스트 체크와 날짜 기록을 지우시겠습니까?")) {
-                localStorage.removeItem('myBucketList');
-                localStorage.removeItem('loveStartDate');
-                alert("깨끗하게 지워졌습니다! 새로고침합니다.");
-                location.reload();
-            }
-        }
+      function openLovePopup() {
+        document.getElementById("love-modal").style.display = "flex";
+      }
+      function closeLovePopup() {
+        document.getElementById("love-modal").style.display = "none";
+      }
 
-        function openLovePopup() { document.getElementById('love-modal').style.display = 'flex'; }
-        function closeLovePopup() { document.getElementById('love-modal').style.display = 'none'; }
+      function loadBucketList() {
+        const savedData =
+          JSON.parse(localStorage.getItem("myBucketList")) || [];
+        const items = document.querySelectorAll(".bucket-item");
+        items.forEach((item, index) => {
+          if (savedData.length > index && savedData[index] === true) {
+            item.classList.add("done");
+          } else {
+            item.classList.remove("done");
+          }
+        });
+      }
 
-        function loadBucketList() {
-            const savedData = JSON.parse(localStorage.getItem('myBucketList')) || [];
-            const items = document.querySelectorAll('.bucket-item');
-            items.forEach((item, index) => {
-                if (savedData.length > index && savedData[index] === true) {
-                    item.classList.add('done');
-                } else {
-                    item.classList.remove('done');
-                }
-            });
-        }
+      function toggleBucket(item, index) {
+        item.classList.toggle("done");
+        let currentData =
+          JSON.parse(localStorage.getItem("myBucketList")) || [];
+        currentData[index] = item.classList.contains("done");
+        localStorage.setItem("myBucketList", JSON.stringify(currentData));
+      }
 
-        function toggleBucket(item, index) {
-            item.classList.toggle('done');
-            let currentData = JSON.parse(localStorage.getItem('myBucketList')) || [];
-            currentData[index] = item.classList.contains('done');
-            localStorage.setItem('myBucketList', JSON.stringify(currentData));
-        }
+      function toggleNav() {
+        const navMenu = document.getElementById("nav-menu");
+        navMenu.classList.toggle("active");
+      }
 
-        function toggleNav() {
-            const navMenu = document.getElementById('nav-menu');
-            navMenu.classList.toggle('active');
-        }
+      window.onload = function () {
+        createStars(); // 별 생성 함수 실행
+        updateDday();
+        loadBucketList();
+      };
 
-        window.onload = function () {
-            updateDday();
-            loadBucketList();
-        }
-
-        document.getElementById('love-modal').onclick = function (event) {
-            if (event.target === this) closeLovePopup();
-        }
+      document.getElementById("love-modal").onclick = function (event) {
+        if (event.target === this) closeLovePopup();
+      };
     </script>
-</body>
-
+  </body>
 </html>

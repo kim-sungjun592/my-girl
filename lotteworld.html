@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>열 두 번째 데이트 | 롯데월드 x 메이플스토리</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@1.530/neodgm/style.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      /* ========================================================================= */
+      /* 🏰🍁 [롯데월드 x 메이플] 매직 아일랜드의 밤하늘 + 레트로 게임 UI 감성 */
+      /* ========================================================================= */
+
+      body {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        /* 메이플 폰트를 기본으로, 깨지는 특수문자는 Noto Sans로 대체 */
+        font-family: "NeoDunggeunmo", "Noto Sans KR", sans-serif;
+        min-height: 100vh;
+        color: #fff;
+
+        /* 롯데월드의 신비로운 밤하늘과 퍼레이드 불빛을 연상시키는 배경 */
+        background: linear-gradient(
+          135deg,
+          #170b2b 0%,
+          #3b185f 50%,
+          #20124d 100%
+        );
+        background-attachment: fixed;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* 밤하늘의 별가루 (반짝이는 마법 이펙트) */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image:
+          radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 2px),
+          radial-gradient(rgba(255, 215, 0, 0.5) 2px, transparent 3px);
+        background-size:
+          100px 100px,
+          150px 150px;
+        background-position:
+          0 0,
+          50px 50px;
+        pointer-events: none;
+        z-index: -1;
+        animation: starDrift 60s linear infinite;
+      }
+
+      @keyframes starDrift {
+        from {
+          background-position:
+            0 0,
+            50px 50px;
+        }
+        to {
+          background-position:
+            -500px 500px,
+            -450px 550px;
+        }
+      }
+
+      /* ------------------------------------------------ */
+      /* 1. 헤더 (메뉴바) - 게임 상단바 느낌 */
+      /* ------------------------------------------------ */
+      header {
+        background: rgba(20, 10, 35, 0.85);
+        backdrop-filter: blur(8px);
+        height: 70px;
+        display: flex;
+        align-items: center;
+        box-shadow:
+          0 4px 15px rgba(0, 0, 0, 0.8),
+          0 1px 0 rgba(255, 215, 0, 0.3);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+      }
+
+      .logo a {
+        text-decoration: none;
+        color: #ffd700; /* 황금빛 */
+        font-size: 1.8rem;
+        text-shadow: 2px 2px 0px #8b4513;
+      }
+
+      .logo span {
+        color: #ff8c00;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 25px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #e2e8f0;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+        text-shadow: 1px 1px 2px #000;
+      }
+
+      .nav-links a:hover {
+        color: #ffd700;
+      }
+
+      .menu-toggle {
+        display: none;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: #ffd700;
+        user-select: none;
+      }
+
+      /* ------------------------------------------------ */
+      /* 2. 페이지 제목 - 퀘스트 완료 / 레벨업 알림 배너 스타일 */
+      /* ------------------------------------------------ */
+      h1.page-title {
+        background: linear-gradient(180deg, #ffb347 0%, #ff7b00 100%);
+        padding: 15px 40px;
+        margin-top: 50px;
+        margin-bottom: 40px;
+        display: inline-block;
+        color: #fff;
+        border-radius: 8px;
+        border: 4px solid #ffe4b5;
+        box-shadow:
+          0 10px 20px rgba(0, 0, 0, 0.5),
+          inset 0 -3px 0 rgba(210, 105, 30, 0.8);
+        text-shadow: 2px 2px 0 #b33900;
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+      }
+
+      /* ------------------------------------------------ */
+      /* 3. 갤러리 - 인벤토리 아이템 창 + 스타포스 강화 이펙트 */
+      /* ------------------------------------------------ */
+      .gallery-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .gallery-container img {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 5px; /* 게임 UI처럼 약간 각진 모서리 */
+        border: 6px solid #cbd5e1; /* 은빛 테두리 */
+        background-color: #1e293b;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        cursor: pointer;
+      }
+
+      /* 마우스 호버 시 스타포스 15성(?) 황금빛 이펙트 */
+      .gallery-container img:hover {
+        transform: translateY(-8px) scale(1.03);
+        border-color: #ffd700;
+        box-shadow:
+          0 15px 25px rgba(0, 0, 0, 0.8),
+          0 0 20px rgba(255, 215, 0, 0.8),
+          /* 바깥쪽 황금빛 */ inset 0 0 15px rgba(255, 215, 0, 0.5); /* 안쪽 황금빛 */
+      }
+
+      /* ------------------------------------------------ */
+      /* 4. 돌아가기 버튼 - 메이플 시스템 버튼 스타일 (파란색) */
+      /* ------------------------------------------------ */
+      .btn-back {
+        display: inline-block;
+        background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        padding: 15px 50px;
+        border-radius: 5px;
+        border: 3px solid #e0f2fe;
+        text-decoration: none;
+        font-size: 1.3rem;
+        box-shadow:
+          0 5px 15px rgba(0, 0, 0, 0.5),
+          inset 0 -3px 0 rgba(2, 132, 199, 0.8);
+        text-shadow: 1px 1px 0 #0369a1;
+        transition: all 0.2s ease;
+      }
+
+      .btn-back:hover {
+        background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%);
+        transform: translateY(2px);
+        box-shadow:
+          0 2px 10px rgba(0, 0, 0, 0.5),
+          inset 0 -1px 0 rgba(2, 132, 199, 0.8);
+      }
+
+      /* ------------------------------------------------ */
+      /* 모바일 반응형 디자인 */
+      /* ------------------------------------------------ */
+      @media (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+        .nav-links {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background-color: rgba(20, 10, 35, 0.95);
+          box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+          text-align: center;
+          padding: 15px 0;
+          border-bottom: 2px solid #ffd700;
+        }
+        .nav-links li {
+          margin: 15px 0;
+        }
+        .nav-links.active {
+          display: flex;
+        }
+
+        h1.page-title {
+          font-size: 1.5rem;
+          padding: 12px 25px;
+          border-width: 3px;
+        }
+        .gallery-container img {
+          width: 100%;
+          max-width: 320px;
+          height: auto;
+          aspect-ratio: 1 / 1;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="container">
+        <h1 class="logo">
+          <a href="index.html">우리<span>활동</span></a>
+        </h1>
+
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="date.html">갤러리</a></li>
+          <li><a href="date.html">데이트 장소</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <h1 class="page-title">Lv.12 롯데월드 x 메이플 데이트 🏰🍁</h1>
+
+    <div class="gallery-container">
+      <img src="img12/1.jpeg" alt="사진1" />
+      <img src="img12/2.jpeg" alt="사진2" />
+      <img src="img12/3.jpeg" alt="사진3" />
+      <img src="img12/4.jpeg" alt="사진4" />
+      <img src="img12/5.jpeg" alt="사진5" />
+      <img src="img12/6.jpeg" alt="사진6" />
+      <img src="img12/7.jpeg" alt="사진7" />
+      <img src="img12/8.jpeg" alt="사진8" />
+      <img src="img12/9.jpeg" alt="사진9" />
+      <img src="img12/10.jpeg" alt="사진10" />
+      <img src="img12/11.jpeg" alt="사진11" />
+      <img src="img12/12.jpeg" alt="사진12" />
+      <img src="img12/13.jpeg" alt="사진13" />
+      <img src="img12/14.jpeg" alt="사진14" />
+      <img src="img12/15.jpeg" alt="사진15" />
+      <img src="img12/16.jpeg" alt="사진16" />
+      <img src="img12/17.jpeg" alt="사진17" />
+      <img src="img12/18.jpeg" alt="사진18" />
+      <img src="img12/19.jpeg" alt="사진19" />
+      <img src="img12/20.jpeg" alt="사진20" />
+      <img src="img12/21.jpeg" alt="사진21" />
+      <img src="img12/22.jpeg" alt="사진22" />
+    </div>
+
+    <div style="text-align: center; margin: 60px 0">
+      <a href="date.html" class="btn-back">돌아가기</a>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const navMenu = document.getElementById("nav-menu");
+        navMenu.classList.toggle("active");
+      }
+    </script>
+  </body>
+</html>

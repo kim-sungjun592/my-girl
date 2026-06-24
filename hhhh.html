@@ -1,492 +1,700 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>나의 공주님 | 소개합니다</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
-        /* 기본 폰트 설정 */
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #fdf2f8;
-            margin: 0;
-            padding: 0;
-        }
+      /* 기본 폰트 설정 */
+      body {
+        font-family: "Noto Sans KR", sans-serif;
+        background-color: #fdf2f8;
+        margin: 0;
+        padding: 0;
+      }
 
-        /* =========================================
+      /* =========================================
+           ✨ [마법의 배경] 공주님 전용 배경 & 효과 ✨
+           ========================================= */
+      body {
+        background: linear-gradient(
+          -45deg,
+          #fdf2f8,
+          #ffe4e6,
+          #fce7f3,
+          #fff0f5
+        ) !important;
+        background-size: 400% 400% !important;
+        animation: princessBG 15s ease infinite !important;
+        position: relative;
+      }
+
+      @keyframes princessBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 38 C12 28 5 19 5 12 C5 6 10 2 16 2 C20 2 23 4 25 7 C27 4 30 2 34 2 C40 2 45 6 45 12 C45 19 38 28 25 38 Z' fill='rgba(255, 182, 193, 0.15)'/%3E%3C/svg%3E");
+        background-size: 60px 60px;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* =========================================
+           💖 헤더 & 드롭다운 메뉴 (공주님 테마) 💖
+           ========================================= */
+      header {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 4px 15px rgba(255, 105, 180, 0.15);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        border-bottom: 2px solid rgba(255, 182, 193, 0.4);
+      }
+
+      nav.container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .logo {
+        margin: 0;
+        font-size: 1.8rem;
+      }
+      .logo a {
+        font-family: "Gaegu", cursive;
+        text-decoration: none;
+        color: #d6336c;
+        text-shadow: 1px 1px 0px #fff;
+      }
+      .logo span {
+        color: #ff4757;
+        font-size: 1.5rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fff0f5;
+        color: #d6336c;
+        border: 2px solid #ffb6c1;
+        padding: 8px 18px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(255, 105, 180, 0.2);
+        user-select: none;
+      }
+
+      .menu-toggle:hover {
+        background: #ffe4e6;
+        transform: scale(1.05);
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border: 2px solid #ffe4e6;
+        border-radius: 15px;
+        padding: 15px 0;
+        margin: 0;
+        list-style: none;
+        box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+        min-width: 180px;
+        z-index: 200;
+        animation: slideDown 0.3s ease;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+      }
+      .nav-links a {
+        display: block;
+        text-decoration: none;
+        color: #d6336c;
+        font-weight: bold;
+        padding: 12px 20px;
+        transition: 0.3s;
+      }
+      .nav-links a:hover {
+        color: #ff4757;
+        background: #fff0f5;
+      }
+
+      /* =========================================
            ★ 상단 배경 이미지 (왕관 프레임) ★
            ========================================= */
-        .intro-hero {
-            background-image: url('./img/intro_bg.png');
-            background-position: center center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
+      .intro-hero {
+        background-image: url("./img/intro_bg.png");
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
 
-        .intro-hero h2 {
-            font-family: 'Gaegu', cursive;
-            font-size: 3rem;
-            color: #d6336c;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-            margin: 0;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 10px 30px;
-            border-radius: 50px;
-            backdrop-filter: blur(2px);
-        }
+      .intro-hero h2 {
+        font-family: "Gaegu", cursive;
+        font-size: 3.5rem;
+        color: #d6336c;
+        text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
+        margin: 0;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 10px 40px;
+        border-radius: 50px;
+        backdrop-filter: blur(4px);
+        border: 2px dashed #ffb6c1;
+      }
 
-        .intro-hero span {
-            font-size: 1.2rem;
-            background-color: #ff4757;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            margin-bottom: 15px;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
+      .intro-hero span {
+        font-size: 1.2rem;
+        background-color: #ff4757;
+        color: white;
+        padding: 5px 20px;
+        border-radius: 20px;
+        margin-bottom: 15px;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+      }
 
-        /* -------------------------------------- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+      /* =========================================
+           🎀 스토리북 섹션 (사진 + 글 통합) 🎀
+           ========================================= */
+      section.container {
+        background: rgba(255, 255, 255, 0.7) !important;
+        border-radius: 25px;
+        padding: 50px 40px !important;
+        box-shadow: 0 15px 35px rgba(255, 105, 180, 0.15) !important;
+        backdrop-filter: blur(8px);
+        border: 2px solid rgba(255, 255, 255, 0.9);
+        max-width: 1000px;
+        margin: 0 auto 50px auto;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-title h3 {
+        font-family: "Gaegu", cursive;
+        font-size: 2.5rem;
+        color: #d6336c;
+        display: inline-block;
+        border-bottom: 3px dashed #ff4757;
+        padding-bottom: 10px;
+        margin: 0;
+      }
+
+      .story-container {
+        display: flex;
+        flex-direction: column;
+        gap: 50px; /* 카드 사이 간격 */
+      }
+
+      /* 개별 스토리 카드 */
+      .story-card {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 25px;
+        padding: 25px;
+        box-shadow: 0 10px 25px rgba(255, 105, 180, 0.1);
+        border: 2px dashed #ffb6c1;
+        transition: all 0.4s ease;
+        gap: 40px;
+      }
+
+      .story-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+        background: #fff0f5;
+        border-style: solid;
+      }
+
+      /* 짝수 번째 카드는 좌우 반전 (지그재그 디자인) */
+      .story-card:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      /* 카드 내 사진 영역 */
+      .story-photo {
+        flex: 1;
+        max-width: 45%;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        border: 6px solid #fff;
+        background: #fff;
+      }
+
+      .story-photo img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        display: block;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+      }
+
+      .story-photo img:hover {
+        transform: scale(1.08);
+      }
+
+      /* 카드 내 텍스트 영역 */
+      .story-text {
+        flex: 1;
+        text-align: left;
+      }
+
+      .story-card:nth-child(even) .story-text {
+        text-align: right;
+      }
+
+      .step-badge {
+        font-family: "Gaegu", cursive;
+        color: #ff4757;
+        font-size: 1.6rem;
+        background: #ffe4e6;
+        display: inline-block;
+        padding: 5px 20px;
+        border-radius: 30px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2);
+      }
+
+      .story-text h4 {
+        color: #d6336c;
+        font-size: 1.8rem;
+        margin: 0 0 15px 0;
+      }
+
+      .story-text p {
+        color: #555;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        word-break: keep-all;
+      }
+
+      /* =========================================
+           💖 돌아가기 버튼 디자인 💖
+           ========================================= */
+      .btn-princess-back {
+        display: inline-block;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+        color: white;
+        padding: 15px 45px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.2rem;
+        box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+        border: 3px solid #fff;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn-princess-back::before {
+        content: "💖 ";
+      }
+      .btn-princess-back::after {
+        content: " 💖";
+      }
+
+      .btn-princess-back:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 25px rgba(255, 105, 180, 0.6);
+        background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      }
+
+      /* =========================================
+           ★ 모달창 스타일 ★
+           ========================================= */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 192, 203, 0.85);
+        backdrop-filter: blur(5px);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .modal-card {
+        background: white;
+        width: 900px;
+        max-width: 100%;
+        height: 500px;
+        display: flex;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 15px 40px rgba(255, 105, 180, 0.4);
+        border: 4px solid #fff0f5;
+        animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .modal-img-box {
+        width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        position: relative;
+        background: #ffe4e6;
+      }
+
+      .modal-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .modal-text-box {
+        width: 40%;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: left;
+        background-color: #fff;
+      }
+
+      .modal-title {
+        font-family: "Gaegu", cursive;
+        font-size: 2rem;
+        color: #ff4757;
+        margin-bottom: 15px;
+        border-bottom: 2px dashed #ffe4e6;
+        padding-bottom: 10px;
+      }
+
+      .modal-desc {
+        font-size: 1.1rem;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 2rem;
+        color: #ff4757;
+        cursor: pointer;
+        line-height: 1;
+        z-index: 100;
+        transition: 0.3s;
+        background: rgba(255, 255, 255, 0.9);
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 45px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .close-btn:hover {
+        background: #ff4757;
+        color: white;
+        transform: rotate(90deg);
+      }
+
+      @keyframes popUp {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      /* 모바일 반응형 처리 */
+      @media (max-width: 768px) {
+        /* 모바일에서는 교차 레이아웃 해제하고 세로로 정렬 */
+        .story-card,
+        .story-card:nth-child(even) {
+          flex-direction: column;
+          text-align: center;
+          padding: 20px;
+          gap: 20px;
+        }
+        .story-photo {
+          max-width: 100%;
+        }
+        .story-card:nth-child(even) .story-text {
+          text-align: center; /* 짝수 카드도 모바일에서는 가운데 정렬 */
         }
 
         .modal-card {
-            background: white;
-            width: 900px;
-            max-width: 100%;
-            height: 500px;
-            display: flex;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            animation: popUp 0.3s ease-out;
+          flex-direction: column;
+          height: auto;
+          max-height: 85vh;
         }
-
         .modal-img-box {
-            width: 60%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            position: relative;
+          width: 100%;
+          height: 300px;
         }
-
-        .modal-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
         .modal-text-box {
-            width: 40%;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: left;
-            background-color: #fff;
+          width: 100%;
+          padding: 25px 20px;
+          flex-grow: 1;
+          overflow-y: auto;
         }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff4757;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #ffe4e6;
-            padding-bottom: 10px;
+        .intro-hero {
+          height: 250px;
         }
-
-        .modal-desc {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.6;
+        .intro-hero h2 {
+          font-size: 2.2rem;
         }
-
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 2rem;
-            color: #888;
-            cursor: pointer;
-            line-height: 1;
-            z-index: 100;
-            transition: 0.3s;
-            background: rgba(255, 255, 255, 0.8);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
+        .logo {
+          font-size: 1.4rem;
         }
-
-        .close-btn:hover {
-            color: #333;
-            background: white;
-        }
-
-        @keyframes popUp {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        /* =========================================
-           ✨ [추가된 마법] 공주님 전용 배경 & 효과 ✨
-           ========================================= */
-        body {
-            background: linear-gradient(-45deg, #fdf2f8, #ffe4e6, #fce7f3, #fff0f5) !important;
-            background-size: 400% 400% !important;
-            animation: princessBG 15s ease infinite !important;
-            position: relative;
-        }
-
-        @keyframes princessBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M25 38 C12 28 5 19 5 12 C5 6 10 2 16 2 C20 2 23 4 25 7 C27 4 30 2 34 2 C40 2 45 6 45 12 C45 19 38 28 25 38 Z' fill='rgba(255, 182, 193, 0.15)'/%3E%3C/svg%3E");
-            background-size: 60px 60px;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        section.container,
-        #join-process .container {
-            background: rgba(255, 255, 255, 0.6) !important;
-            border-radius: 25px;
-            padding: 40px !important;
-            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.1) !important;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .step {
-            background: rgba(255, 255, 255, 0.8) !important;
-            border: 2px dashed #ffb6c1 !important;
-            border-radius: 20px !important;
-            padding: 25px 20px !important;
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-        }
-
-        .step:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 25px rgba(255, 105, 180, 0.25) !important;
-            border-style: solid !important;
-            background: #ffffff !important;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .gallery-grid img {
-            border: 5px solid #fff;
-            transition: all 0.4s ease;
-        }
-
-        .gallery-grid img:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 15px 30px rgba(255, 105, 180, 0.4) !important;
-            border-color: #ffe4e6;
-        }
-
-        /* =========================================
-           ★ 헤더 및 모바일 메뉴 추가 스타일 ★
-           ========================================= */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: relative;
-            z-index: 1000;
-        }
-
-        nav.container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-            margin: 0;
-            padding: 0;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ff4757;
-        }
-
-        /* 햄버거 메뉴 버튼 (PC에서는 숨김) */
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #d6336c;
-            user-select: none;
-        }
-
-        /* 모바일 반응형 처리 */
-        @media (max-width: 768px) {
-            .modal-card {
-                flex-direction: column;
-                height: auto;
-                max-height: 85vh;
-            }
-
-            .modal-img-box {
-                width: 100%;
-                height: 300px;
-            }
-
-            .modal-text-box {
-                width: 100%;
-                padding: 25px 20px;
-                flex-grow: 1;
-                overflow-y: auto;
-            }
-
-            .close-btn {
-                top: 10px;
-                right: 10px;
-            }
-
-            .intro-hero {
-                height: 250px;
-            }
-
-            .intro-hero h2 {
-                font-size: 2rem;
-            }
-
-            /* --- 햄버거 메뉴 모바일 설정 --- */
-            .menu-toggle {
-                display: block;
-                /* 모바일에서 햄버거 버튼 보이기 */
-            }
-
-            .nav-links {
-                display: none;
-                /* 기본적으로 숨김 */
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                /* 헤더 바로 아래 */
-                left: 0;
-                width: 100%;
-                background-color: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-                text-align: center;
-                padding: 15px 0;
-                border-bottom-left-radius: 15px;
-                border-bottom-right-radius: 15px;
-                backdrop-filter: blur(5px);
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-            }
-
-            /* JS로 'active' 클래스가 추가되면 메뉴 보이기 */
-            .nav-links.active {
-                display: flex;
-            }
-        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav class="container">
-            <h1 class="logo" style="margin: 0; font-size: 1.5rem;">
-                <a href="index.html" style="text-decoration:none; color:inherit;">제 여자 <span>사진인데요</span></a>
-            </h1>
+      <nav
+        class="container"
+        style="padding: 15px 20px; box-shadow: none; background: transparent"
+      >
+        <h1 class="logo">
+          <a href="index.html">내 여자 <span>예쁜 모습들</span></a>
+        </h1>
 
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <div class="menu-toggle" onclick="toggleMenu(event)">☰ 메뉴</div>
 
-            <ul class="nav-links" id="nav-menu">
-                <li><a href="index.html">홈</a></li>
-                <li><a href="date.html">나랑 데이트 목록</a></li>
-                <li><a href="photo.html">인생네컷</a></li>
-                <li><a href="#join-process">소개</a></li>
-            </ul>
-        </nav>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="index.html">홈</a></li>
+          <li><a href="date.html">나랑 데이트 목록</a></li>
+          <li><a href="photo.html">인생네컷</a></li>
+          <li><a href="#gallery">소개</a></li>
+        </ul>
+      </nav>
     </header>
 
     <div class="intro-hero">
-        <span>MY Princess Photo</span>
-        <h2 style="color: rgb(242, 135, 153);">나의 공주(My Girlfriend)</h2>
+      <span>MY Princess Photo</span>
+      <h2>나의 공주(My Girlfriend)</h2>
     </div>
 
+    <!-- 🎀 통합된 스토리북 섹션 🎀 -->
     <section id="gallery" class="container">
-        <div class="section-title">
-            <h3 style="border-left-color: #e50606;"> 나의 여자친구</h3>
+      <div class="section-title">
+        <h3>여자친구 사진 best</h3>
+      </div>
+
+      <div class="story-container">
+        <!-- 첫 번째 사진 -->
+        <div class="story-card">
+          <div class="story-photo">
+            <img
+              src="./img/image.png"
+              data-title="첫 번째 사진"
+              data-desc="카메라를 보는 시선에서 당당함과 귀여움이 동시에 보입니다. 제가 가장 처음 반했던 표정이에요."
+              onclick="showPhoto(this)"
+            />
+          </div>
+          <div class="story-text">
+            <span class="step-badge">Photo 01</span>
+            <h4>첫 번째 사진</h4>
+            <p>
+              카메라를 보는 시선에서 당당함과 귀여움이 동시에 보입니다.<br />제가
+              가장 처음 반했던 표정이에요.
+            </p>
+          </div>
         </div>
 
-        <div class="gallery-grid">
-            <img src="./img/image.png" data-title="첫 번째 사진"
-                data-desc="카메라를 보는 시선에서 당당함과 귀여움이 동시에 보입니다. 제가 가장 처음 반했던 표정이에요." onclick="showPhoto(this)"
-                style="width: 100%; height: auto; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
-
-            <img src="./img/giir.jpeg" data-title="두 번째 사진"
-                data-desc="츄리닝 입은 모습도 너무 이쁘네요ㅎㅎ 꾸미지 않아도 빛이 나는 사람입니다. 사랑스럽습니다." onclick="showPhoto(this)"
-                style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
-
-            <img src="./img/love.png" data-title="세 번째 사진" data-desc="어떻게 이렇게 이쁘고 귀여울까요? 볼 때마다 심장이 뜁니다. 제 여자친구입니다ㅎㅎ"
-                onclick="showPhoto(this)"
-                style="width: 100%; height: auto; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
-
-            <img src="./img/yoyo.png" data-title="네 번째 사진"
-                data-desc="이번 사진은 제가 제일 좋아하는 사진인데요, 한복 입은 모습이 꼭 명문가 아가씨 같네요ㅎㅎ 단아함 그 자체!" onclick="showPhoto(this)"
-                style="width: 100%; height: 100%; object-fit: cover; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border-radius:10px;">
+        <!-- 두 번째 사진 (텍스트 왼쪽, 사진 오른쪽) -->
+        <div class="story-card">
+          <div class="story-photo">
+            <img
+              src="./img/giir.jpeg"
+              data-title="두 번째 사진"
+              data-desc="츄리닝 입은 모습도 너무 이쁘네요ㅎㅎ 꾸미지 않아도 빛이 나는 사람입니다. 사랑스럽습니다."
+              onclick="showPhoto(this)"
+            />
+          </div>
+          <div class="story-text">
+            <span class="step-badge">Photo 02</span>
+            <h4>두 번째 사진</h4>
+            <p>
+              츄리닝 입은 모습도 너무 이쁘네요ㅎㅎ<br />꾸미지 않아도 빛이 나는
+              사람입니다. 사랑스럽습니다.
+            </p>
+          </div>
         </div>
+
+        <!-- 세 번째 사진 -->
+        <div class="story-card">
+          <div class="story-photo">
+            <img
+              src="./img/love.png"
+              data-title="세 번째 사진"
+              data-desc="어떻게 이렇게 이쁘고 귀여울까요? 볼 때마다 심장이 뜁니다. 제 여자친구입니다ㅎㅎ"
+              onclick="showPhoto(this)"
+            />
+          </div>
+          <div class="story-text">
+            <span class="step-badge">Photo 03</span>
+            <h4>세 번째 사진</h4>
+            <p>
+              어떻게 이렇게 이쁘고 귀여울까요?<br />볼 때마다 심장이 뜁니다. 제
+              여자친구입니다ㅎㅎ
+            </p>
+          </div>
+        </div>
+
+        <!-- 네 번째 사진 (텍스트 왼쪽, 사진 오른쪽) -->
+        <div class="story-card">
+          <div class="story-photo">
+            <img
+              src="./img/yoyo.png"
+              data-title="네 번째 사진"
+              data-desc="이번 사진은 제가 제일 좋아하는 사진인데요, 한복 입은 모습이 꼭 명문가 아가씨 같네요ㅎㅎ 단아함 그 자체!"
+              onclick="showPhoto(this)"
+            />
+          </div>
+          <div class="story-text">
+            <span class="step-badge">Photo 04</span>
+            <h4>네 번째 사진</h4>
+            <p>
+              이번 사진은 제가 제일 좋아하는 사진인데요,<br />한복 입은 모습이
+              꼭 명문가 아가씨 같네요ㅎㅎ 단아함 그 자체!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 60px">
+        <a href="index.html" class="btn-princess-back">메인으로 돌아가기</a>
+      </div>
     </section>
 
-    <section id="join-process" class="bg-light" style="margin-top: 50px; padding: 50px 0;">
-        <div class="container">
-            <div class="section-title">
-                <h3 style="border-left-color: #ed76bd;">사진별 소개 </h3>
-            </div>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-num" style="color: #f506b2; font-weight: bold; font-size: 1.2rem;">01</div>
-                    <h4>첫 번째 사진</h4>
-                    <p>카메라를 보는 시선에서 당당함과 귀여움이 동시에 보입니다</p>
-                </div>
-                <div class="step">
-                    <div class="step-num" style="color: #f506b2; font-weight: bold; font-size: 1.2rem;">02</div>
-                    <h4>두 번째 사진</h4>
-                    <p>츄리닝 입은 모습도 너무 이쁘네요ㅎㅎ 사랑스럽습니다</p>
-                </div>
-                <div class="step">
-                    <div class="step-num" style="color: #f506b2; font-weight: bold; font-size: 1.2rem;">03</div>
-                    <h4>세 번째 사진</h4>
-                    <p>어떻게 이렇게 이쁘고 귀여울까요? 제 여자친구입니다ㅎㅎ</p>
-                </div>
-                <div class="step">
-                    <div class="step-num" style="color: #f506b2; font-weight: bold; font-size: 1.2rem;">04</div>
-                    <h4>네 번째 사진</h4>
-                    <p>이번 사진은 제가 제일 좋아하는 사진인데요 한복 입은 모습이 꼭 가문의 아가씨 같네요ㅎㅎ </p>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="index.html" class="btn-main"
-                    style="background-color: #f77eef; padding: 12px 30px; border-radius: 30px; color: white; text-decoration: none; font-weight: bold;">돌아가기</a>
-            </div>
-        </div>
-    </section>
-
+    <!-- 사진 모달창 (클릭 시 원본 확인용) -->
     <div id="img-modal" class="modal-overlay" onclick="closeImgModal(event)">
-        <div class="modal-card" onclick="event.stopPropagation()">
-            <div class="modal-img-box">
-                <span class="close-btn" onclick="closeImgModal()">&times;</span>
-                <img id="modal-img" src="">
-            </div>
-
-            <div class="modal-text-box">
-                <h3 id="modal-title" class="modal-title">제목</h3>
-                <p id="modal-desc" class="modal-desc">설명 내용...</p>
-            </div>
+      <div class="modal-card" onclick="event.stopPropagation()">
+        <div class="modal-img-box">
+          <span class="close-btn" onclick="closeImgModal()">&times;</span>
+          <img id="modal-img" src="" />
         </div>
+        <div class="modal-text-box">
+          <h3 id="modal-title" class="modal-title">제목</h3>
+          <p id="modal-desc" class="modal-desc">설명 내용...</p>
+        </div>
+      </div>
     </div>
 
     <script>
-        // --- 햄버거 메뉴 토글 기능 추가 ---
-        function toggleMenu() {
-            const navMenu = document.getElementById('nav-menu');
-            navMenu.classList.toggle('active');
+      function toggleMenu(event) {
+        event.stopPropagation();
+        const navMenu = document.getElementById("nav-menu");
+        navMenu.classList.toggle("active");
+      }
+
+      window.onclick = function (event) {
+        const navMenu = document.getElementById("nav-menu");
+        if (
+          !event.target.closest(".menu-toggle") &&
+          navMenu.classList.contains("active")
+        ) {
+          navMenu.classList.remove("active");
         }
-        // ---------------------------------
+      };
 
-        function showPhoto(element) {
-            const modal = document.getElementById('img-modal');
-            const modalImg = document.getElementById('modal-img');
-            const modalTitle = document.getElementById('modal-title');
-            const modalDesc = document.getElementById('modal-desc');
+      function showPhoto(element) {
+        const modal = document.getElementById("img-modal");
+        const modalImg = document.getElementById("modal-img");
+        const modalTitle = document.getElementById("modal-title");
+        const modalDesc = document.getElementById("modal-desc");
 
-            const imgSrc = element.src;
-            const imgTitle = element.getAttribute('data-title');
-            const imgDesc = element.getAttribute('data-desc');
+        const imgSrc = element.src;
+        const imgTitle = element.getAttribute("data-title");
+        const imgDesc = element.getAttribute("data-desc");
 
-            modalImg.src = imgSrc;
-            modalTitle.innerText = imgTitle;
-            modalDesc.innerText = imgDesc;
+        modalImg.src = imgSrc;
+        modalTitle.innerText = imgTitle;
+        modalDesc.innerText = imgDesc;
 
-            modal.style.display = "flex";
+        modal.style.display = "flex";
+      }
+
+      function closeImgModal(event) {
+        if (
+          !event ||
+          event.target.id === "img-modal" ||
+          event.target.classList.contains("close-btn")
+        ) {
+          document.getElementById("img-modal").style.display = "none";
         }
-
-        function closeImgModal(event) {
-            if (!event || event.target.id === 'img-modal') {
-                document.getElementById('img-modal').style.display = "none";
-            }
-        }
+      }
     </script>
-</body>
-
+  </body>
 </html>
