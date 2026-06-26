@@ -14,18 +14,14 @@
     />
 
     <style>
-      /* =========================================
-           🌌 [NEW] 보랏빛 밤하늘 테마 배경
-           ========================================= */
       body {
         margin: 0;
         font-family: "Noto Sans KR", sans-serif;
-        color: #f8fafc; /* 어두운 배경에 맞게 글자를 밝게 변경 */
+        color: #f8fafc;
         background-color: #0b0f19;
         overflow-x: hidden;
       }
 
-      /* 1. 움직이는 우주/밤하늘 그라데이션 */
       .bg-night {
         position: fixed;
         top: 0;
@@ -37,7 +33,6 @@
         background-size: 400% 400%;
         animation: gradientMove 15s ease infinite;
       }
-
       @keyframes gradientMove {
         0% {
           background-position: 0% 50%;
@@ -50,7 +45,6 @@
         }
       }
 
-      /* 2. 반짝이는 배경 별빛 (Twinkling Stars) */
       .stars-container {
         position: fixed;
         top: 0;
@@ -60,14 +54,12 @@
         z-index: -2;
         pointer-events: none;
       }
-
       .star {
         position: absolute;
         background-color: #fff;
         border-radius: 50%;
         animation: twinkle infinite ease-in-out;
       }
-
       @keyframes twinkle {
         0%,
         100% {
@@ -83,7 +75,6 @@
         }
       }
 
-      /* 3. 별똥별 (Shooting Star) */
       .shooting-star {
         position: absolute;
         width: 150px;
@@ -96,7 +87,6 @@
         pointer-events: none;
         z-index: -1;
       }
-
       .shooting-star::after {
         content: "";
         position: absolute;
@@ -110,7 +100,6 @@
           0 0 15px #fff,
           0 0 30px #c084fc;
       }
-
       .shooting-star:nth-child(2) {
         top: 20%;
         right: -50px;
@@ -123,7 +112,6 @@
         animation-delay: 5s;
         animation-duration: 7s;
       }
-
       @keyframes shootingStar {
         0% {
           transform: translate(0, 0) rotate(-45deg);
@@ -139,7 +127,6 @@
         }
       }
 
-      /* 4. 위로 떠오르는 빛무리와 파티클 */
       .floating-particles {
         position: fixed;
         top: 0;
@@ -151,7 +138,6 @@
         margin: 0;
         padding: 0;
       }
-
       .floating-particles li {
         position: absolute;
         display: block;
@@ -161,7 +147,6 @@
         animation: floatUp infinite linear;
         bottom: -100px;
       }
-
       .floating-particles li:nth-child(1) {
         left: 10%;
         font-size: 1.5rem;
@@ -191,7 +176,6 @@
         animation-duration: 14s;
         animation-delay: 5s;
       }
-
       @keyframes floatUp {
         0% {
           transform: translateY(0) rotate(0deg);
@@ -209,9 +193,6 @@
         }
       }
 
-      /* =========================================
-           💎 어두운 배경에 맞춘 다크 글래스모피즘
-           ========================================= */
       .glass-panel {
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(12px);
@@ -220,9 +201,6 @@
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
       }
 
-      /* =========================================
-           ✨ 상단 헤더
-           ========================================= */
       header {
         background: rgba(15, 12, 41, 0.6);
         backdrop-filter: blur(15px);
@@ -232,7 +210,6 @@
         top: 0;
         z-index: 1000;
       }
-
       header nav.container {
         position: relative;
         display: flex;
@@ -244,7 +221,6 @@
         margin: 0 auto;
         box-sizing: border-box;
       }
-
       .logo {
         font-family: "Gaegu", cursive;
         font-size: 2.2rem;
@@ -254,10 +230,9 @@
         white-space: nowrap;
         text-shadow: 0 0 10px rgba(192, 132, 252, 0.8);
       }
-
       .logo span {
         color: #fcd34d;
-      } /* 노란/금빛 포인트 */
+      }
 
       .d-day-center {
         position: absolute;
@@ -265,7 +240,6 @@
         transform: translateX(-50%);
         white-space: nowrap;
       }
-
       .d-day-btn {
         cursor: pointer;
         padding: 8px 22px;
@@ -279,14 +253,12 @@
         box-shadow: 0 0 15px rgba(192, 132, 252, 0.4);
         transition: all 0.3s;
       }
-
       .d-day-btn:hover {
         background: rgba(255, 255, 255, 0.2);
         box-shadow: 0 0 25px rgba(192, 132, 252, 0.8);
         transform: translateY(-2px);
         color: #fff;
       }
-
       .header-right {
         position: absolute;
         right: 20px;
@@ -294,7 +266,6 @@
         transform: translateY(-50%);
         display: flex;
       }
-
       .menu-toggle-btn {
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.3);
@@ -306,11 +277,9 @@
         transition: 0.3s;
         white-space: nowrap;
       }
-
       .menu-toggle-btn:hover {
         background: rgba(255, 255, 255, 0.2);
       }
-
       .nav-links {
         display: none;
         flex-direction: column;
@@ -329,12 +298,10 @@
         margin: 0;
         z-index: 2000;
       }
-
       .nav-links.active {
         display: flex;
         animation: dropDownAnim 0.3s forwards;
       }
-
       @keyframes dropDownAnim {
         from {
           opacity: 0;
@@ -345,7 +312,6 @@
           transform: translateY(0);
         }
       }
-
       .nav-links a {
         text-decoration: none;
         color: #cbd5e1;
@@ -355,21 +321,16 @@
         display: block;
         padding: 5px 0;
       }
-
       .nav-links a:hover {
         color: #fcd34d;
         transform: translateX(-5px);
       }
 
-      /* =========================================
-           🌌 메인 히어로 배너
-           ========================================= */
       .hero-container {
         max-width: 1000px;
         margin: 50px auto 30px;
         padding: 0 20px;
       }
-
       .hero-banner {
         border-radius: 35px;
         padding: 50px 20px;
@@ -380,7 +341,6 @@
         flex-direction: column;
         align-items: center;
       }
-
       .hero-banner h2 {
         font-family: "Gaegu", cursive;
         font-size: 3rem;
@@ -390,7 +350,6 @@
         z-index: 2;
         text-shadow: 0 0 15px rgba(192, 132, 252, 0.8);
       }
-
       .hero-banner p {
         font-size: 1.2rem;
         color: #cbd5e1;
@@ -399,14 +358,12 @@
         position: relative;
         z-index: 2;
       }
-
       .moon-icon {
         font-size: 4rem;
         margin-bottom: 10px;
         animation: floatMoon 4s ease-in-out infinite;
         filter: drop-shadow(0 0 20px rgba(252, 211, 77, 0.6));
       }
-
       @keyframes floatMoon {
         0%,
         100% {
@@ -417,9 +374,6 @@
         }
       }
 
-      /* =========================================
-           📱 위젯 (Bento) 그리드
-           ========================================= */
       .widget-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -428,7 +382,6 @@
         margin: 0 auto 80px;
         padding: 0 20px;
       }
-
       .widget-card {
         border-radius: 30px;
         padding: 30px 20px;
@@ -444,7 +397,6 @@
         overflow: hidden;
         z-index: 1;
       }
-
       .widget-card:hover {
         transform: translateY(-10px);
         box-shadow:
@@ -452,26 +404,22 @@
           inset 0 0 20px rgba(192, 132, 252, 0.2);
         border-color: rgba(255, 255, 255, 0.4);
       }
-
       .span-2 {
         grid-column: span 2;
       }
       .span-row-2 {
         grid-row: span 2;
       }
-
       .widget-icon {
         font-size: 3.5rem;
         margin-bottom: 15px;
         transition: 0.4s;
         filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
       }
-
       .widget-card:hover .widget-icon {
         transform: scale(1.15);
         filter: drop-shadow(0 0 20px rgba(252, 211, 77, 0.8));
       }
-
       .widget-title {
         font-size: 1.4rem;
         font-weight: bold;
@@ -480,14 +428,12 @@
         font-family: "Noto Sans KR", sans-serif;
         text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
       }
-
       .widget-desc {
         font-size: 1rem;
         color: #94a3b8;
         word-break: keep-all;
       }
 
-      /* 사진 카드 오버레이 */
       .img-widget {
         padding: 0;
         background-size: cover;
@@ -496,7 +442,6 @@
         min-height: 220px;
         border: 1px solid rgba(255, 255, 255, 0.2);
       }
-
       .img-widget::after {
         content: "";
         position: absolute;
@@ -509,7 +454,6 @@
         border-radius: 25px;
         z-index: 1;
       }
-
       .img-widget .widget-content {
         position: absolute;
         bottom: 25px;
@@ -525,8 +469,229 @@
       }
 
       /* =========================================
-           🌌 다크 테마 팝업 모달
-           ========================================= */
+         🚀 끝 카드 - 로켓 애니메이션
+         ========================================= */
+      .rocket-end-card {
+        position: relative;
+        overflow: hidden;
+        background: rgba(15, 12, 41, 0.85) !important;
+        border: 1px solid rgba(192, 132, 252, 0.3) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.4s ease !important;
+      }
+      .rocket-end-card:hover {
+        transform: translateY(-10px) !important;
+        border-color: rgba(192, 132, 252, 0.7) !important;
+        box-shadow:
+          0 0 30px rgba(192, 132, 252, 0.35),
+          0 20px 40px rgba(0, 0, 0, 0.5) !important;
+      }
+
+      /* 카드 내부 별빛 */
+      .star-bg-card {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 30px;
+      }
+      .star-bg-card .s-dot {
+        position: absolute;
+        border-radius: 50%;
+        background: #fff;
+        animation: sDotTwinkle infinite ease-in-out;
+      }
+      @keyframes sDotTwinkle {
+        0%,
+        100% {
+          opacity: 0.15;
+          transform: scale(0.8);
+        }
+        50% {
+          opacity: 0.9;
+          transform: scale(1.3);
+        }
+      }
+
+      /* 좌우 글로우 */
+      .glow-end {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(192, 132, 252, 0.15);
+        filter: blur(18px);
+        pointer-events: none;
+        animation: glowEndPulse 2.5s ease-in-out infinite alternate;
+      }
+      .glow-end.left {
+        left: 15px;
+      }
+      .glow-end.right {
+        right: 15px;
+        animation-delay: 1.2s;
+      }
+      @keyframes glowEndPulse {
+        from {
+          opacity: 0.4;
+          transform: translateY(-50%) scale(1);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(-50%) scale(1.5);
+        }
+      }
+
+      /* 로켓 래퍼 */
+      .rocket-wrap {
+        position: relative;
+        width: 64px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        z-index: 2;
+      }
+
+      /* 기본 둥실 */
+      .rocket-fly {
+        font-size: 3rem;
+        display: block;
+        position: relative;
+        z-index: 2;
+        filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.6));
+        animation: rocketFloatAnim 3s ease-in-out infinite;
+        transform-origin: center bottom;
+      }
+      @keyframes rocketFloatAnim {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-10deg);
+        }
+        50% {
+          transform: translateY(-10px) rotate(-10deg);
+        }
+      }
+
+      /* hover 발사 */
+      .rocket-end-card:hover .rocket-fly {
+        animation: rocketLaunchAnim 0.9s ease-in forwards;
+      }
+      @keyframes rocketLaunchAnim {
+        0% {
+          transform: translateY(0) rotate(-10deg);
+          opacity: 1;
+        }
+        30% {
+          transform: translateY(-6px) rotate(-15deg) scale(1.1);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-130px) rotate(-25deg) scale(0.3);
+          opacity: 0;
+        }
+      }
+
+      /* 불꽃 */
+      .rocket-flame-end {
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 20px;
+        background: linear-gradient(to bottom, #fcd34d, #f97316, transparent);
+        border-radius: 0 0 50% 50%;
+        animation: flameEndPulse 0.3s ease-in-out infinite alternate;
+        filter: blur(2px);
+        opacity: 0.85;
+        z-index: 1;
+      }
+      @keyframes flameEndPulse {
+        from {
+          transform: translateX(-50%) scaleY(1);
+          opacity: 0.7;
+        }
+        to {
+          transform: translateX(-50%) scaleY(1.5);
+          opacity: 1;
+        }
+      }
+
+      /* 연기 트레일 */
+      .rocket-trail {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 3px;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.2s;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .rocket-end-card:hover .rocket-trail {
+        opacity: 1;
+      }
+      .rt-dot {
+        border-radius: 50%;
+        background: rgba(192, 132, 252, 0.5);
+        animation: rtFade 0.6s ease-out infinite;
+      }
+      .rt-dot:nth-child(1) {
+        width: 8px;
+        height: 8px;
+        animation-delay: 0s;
+      }
+      .rt-dot:nth-child(2) {
+        width: 6px;
+        height: 6px;
+        animation-delay: 0.1s;
+      }
+      .rt-dot:nth-child(3) {
+        width: 5px;
+        height: 5px;
+        animation-delay: 0.2s;
+      }
+      .rt-dot:nth-child(4) {
+        width: 4px;
+        height: 4px;
+        animation-delay: 0.3s;
+      }
+      .rt-dot:nth-child(5) {
+        width: 3px;
+        height: 3px;
+        animation-delay: 0.4s;
+      }
+      @keyframes rtFade {
+        0% {
+          opacity: 0.8;
+          transform: translateY(0);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+      }
+
+      .dnwn-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #e2e8f0;
+        font-family: "Noto Sans KR", sans-serif;
+        text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
+        letter-spacing: 0.05em;
+        position: relative;
+        z-index: 2;
+      }
+
+      /* 모달 */
       .love-modal-overlay {
         display: none;
         position: fixed;
@@ -540,7 +705,6 @@
         justify-content: center;
         align-items: center;
       }
-
       .love-modal-content {
         background: rgba(15, 23, 42, 0.95);
         width: 90%;
@@ -553,7 +717,6 @@
         animation: slideUp 0.4s;
         color: #f8fafc;
       }
-
       @keyframes slideUp {
         from {
           transform: translateY(50px) scale(0.9);
@@ -564,7 +727,6 @@
           opacity: 1;
         }
       }
-
       .close-love-btn {
         position: absolute;
         top: 15px;
@@ -581,13 +743,11 @@
         align-items: center;
         transition: 0.3s;
       }
-
       .close-love-btn:hover {
         color: #fff;
         background: rgba(255, 255, 255, 0.1);
         transform: rotate(90deg);
       }
-
       .popup-hero {
         text-align: center;
         padding: 40px 20px 30px;
@@ -599,7 +759,6 @@
         border-radius: 0 0 30px 30px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
-
       .popup-hero h1 {
         font-family: "Gaegu", cursive;
         font-size: 3.5rem;
@@ -612,7 +771,6 @@
         animation: heartbeat 1s infinite alternate;
         filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
       }
-
       @keyframes heartbeat {
         0% {
           transform: scale(1);
@@ -621,7 +779,6 @@
           transform: scale(1.2);
         }
       }
-
       .popup-bucket {
         padding: 30px;
       }
@@ -663,17 +820,7 @@
         text-decoration: line-through;
         color: #64748b;
       }
-      .dnwn-icon {
-        font-size: 50px;
-      }
-      .dnwn-title {
-        font-size: 1.4rem;
-        text-shadow: 0 0 8px rgba(192, 132, 252, 0.5);
-      }
 
-      /* =========================================
-           📱 반응형
-           ========================================= */
       @media screen and (max-width: 900px) {
         .widget-grid {
           grid-template-columns: repeat(2, 1fr);
@@ -689,7 +836,6 @@
           grid-column: span 2;
         }
       }
-
       @media screen and (max-width: 600px) {
         header nav.container {
           height: 65px;
@@ -702,14 +848,12 @@
           padding: 6px 14px;
           font-size: 1rem;
         }
-
         .hero-banner h2 {
           font-size: 2rem;
         }
         .moon-icon {
           font-size: 3rem;
         }
-
         .widget-grid {
           grid-template-columns: 1fr;
           gap: 15px;
@@ -727,18 +871,11 @@
   </head>
 
   <body>
-    <!-- 🌌 배경 및 별 애니메이션 요소들 -->
     <div class="bg-night"></div>
-
-    <!-- 별똥별 -->
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
     <div class="shooting-star"></div>
-
-    <!-- 반짝이는 배경 별 (랜덤 위치 생성을 위해 JS로 추가함) -->
     <div class="stars-container" id="stars-container"></div>
-
-    <!-- 떠오르는 파티클 -->
     <ul class="floating-particles">
       <li>✨</li>
       <li>💫</li>
@@ -750,17 +887,14 @@
     <header>
       <nav class="container">
         <h1 class="logo">⭐️ 공주 <span>소개</span> ✨</h1>
-
         <div class="d-day-center">
           <button class="d-day-btn" onclick="openLovePopup()">
             🥳 D+<span id="header-love-day">0</span>
           </button>
         </div>
-
         <div class="header-right">
           <button class="menu-toggle-btn" onclick="toggleNav()">☰ 메뉴</button>
         </div>
-
         <ul class="nav-links" id="nav-menu">
           <li><a href="index.html">홈</a></li>
           <li><a href="hhhh.html">공주님 소개</a></li>
@@ -778,11 +912,10 @@
       <div class="hero-banner glass-panel">
         <div class="moon-icon">💜</div>
         <h2>나의 공주님</h2>
-        <p>우리가 함께 빛나는 소중한 시간들 ✨</p>
+        <p>함께 빛나는 소중한 시간들 ✨</p>
       </div>
     </section>
 
-    <!-- 다크 유리 위젯 그리드 -->
     <section class="widget-grid">
       <a
         href="hhhh.html"
@@ -838,9 +971,24 @@
         <div class="widget-title">사랑의 도시락</div>
         <div class="widget-desc">정성 듬뿍 레시피</div>
       </a>
-      <a href="#" class="widget-card span-2 mobile-span-2 glass-panel">
-        <div class="dnwn-icon">🚀</div>
-        <div class="dnwn-title">-끝-</div>
+
+      <!-- 🚀 로켓 끝 카드 -->
+      <a href="#" class="widget-card span-2 mobile-span-2 rocket-end-card">
+        <div class="star-bg-card" id="rocketStarBg"></div>
+        <div class="glow-end left"></div>
+        <div class="glow-end right"></div>
+        <div class="rocket-wrap">
+          <div class="rocket-fly">🚀</div>
+          <div class="rocket-flame-end"></div>
+          <div class="rocket-trail">
+            <div class="rt-dot"></div>
+            <div class="rt-dot"></div>
+            <div class="rt-dot"></div>
+            <div class="rt-dot"></div>
+            <div class="rt-dot"></div>
+          </div>
+        </div>
+        <div class="dnwn-title">— 끝 —</div>
       </a>
     </section>
 
@@ -924,11 +1072,11 @@
     </div>
 
     <script>
-      // 배경에 별 생성하기 (JS로 랜덤 생성)
+      // 배경 별 생성
       function createStars() {
         const container = document.getElementById("stars-container");
         for (let i = 0; i < 50; i++) {
-          let star = document.createElement("div");
+          const star = document.createElement("div");
           star.className = "star";
           star.style.width = Math.random() * 3 + "px";
           star.style.height = star.style.width;
@@ -940,15 +1088,30 @@
         }
       }
 
-      // D-day 계산
+      // 로켓 카드 별빛 생성
+      function createRocketStars() {
+        const bg = document.getElementById("rocketStarBg");
+        if (!bg) return;
+        for (let i = 0; i < 22; i++) {
+          const s = document.createElement("div");
+          s.className = "s-dot";
+          const size = Math.random() * 2.5 + 1;
+          s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random() * 100}%;top:${Math.random() * 100}%;animation-duration:${Math.random() * 2 + 1.5}s;animation-delay:${Math.random() * 2}s;`;
+          bg.appendChild(s);
+        }
+      }
+
+      // D-day
       let savedDate = localStorage.getItem("loveStartDate");
       if (!savedDate) savedDate = "2026-01-01";
 
       function updateDday() {
         const startDate = new Date(savedDate);
         const today = new Date();
-        const timeDiff = today.getTime() - startDate.getTime();
-        const daysDiff = Math.floor(timeDiff / (1000 * 3600 * 24)) + 1;
+        const daysDiff =
+          Math.floor(
+            (today.getTime() - startDate.getTime()) / (1000 * 3600 * 24),
+          ) + 1;
         document.getElementById("header-love-day").innerText = daysDiff;
         document.getElementById("popup-love-day").innerText = daysDiff + "일째";
       }
@@ -976,37 +1139,32 @@
       function loadBucketList() {
         const savedData =
           JSON.parse(localStorage.getItem("myBucketList")) || [];
-        const items = document.querySelectorAll(".bucket-item");
-        items.forEach((item, index) => {
-          if (savedData.length > index && savedData[index] === true) {
-            item.classList.add("done");
-          } else {
-            item.classList.remove("done");
-          }
+        document.querySelectorAll(".bucket-item").forEach((item, index) => {
+          if (savedData[index] === true) item.classList.add("done");
+          else item.classList.remove("done");
         });
       }
 
       function toggleBucket(item, index) {
         item.classList.toggle("done");
-        let currentData =
-          JSON.parse(localStorage.getItem("myBucketList")) || [];
-        currentData[index] = item.classList.contains("done");
-        localStorage.setItem("myBucketList", JSON.stringify(currentData));
+        const data = JSON.parse(localStorage.getItem("myBucketList")) || [];
+        data[index] = item.classList.contains("done");
+        localStorage.setItem("myBucketList", JSON.stringify(data));
       }
 
       function toggleNav() {
-        const navMenu = document.getElementById("nav-menu");
-        navMenu.classList.toggle("active");
+        document.getElementById("nav-menu").classList.toggle("active");
       }
 
       window.onload = function () {
-        createStars(); // 별 생성 함수 실행
+        createStars();
+        createRocketStars();
         updateDday();
         loadBucketList();
       };
 
-      document.getElementById("love-modal").onclick = function (event) {
-        if (event.target === this) closeLovePopup();
+      document.getElementById("love-modal").onclick = function (e) {
+        if (e.target === this) closeLovePopup();
       };
     </script>
   </body>
