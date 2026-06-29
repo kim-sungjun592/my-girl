@@ -26,6 +26,87 @@
         color: #333;
       }
 
+      /* === [추가된 로그인 화면 스타일 시작] === */
+      .login-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #fdfaf6;
+        background-image:
+          linear-gradient(rgba(255, 182, 193, 0.2) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 182, 193, 0.2) 1px, transparent 1px);
+        background-size: 25px 25px;
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .login-box {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(255, 182, 193, 0.4);
+        text-align: center;
+        border: 2px dashed #ffc0cb;
+        width: 80%;
+        max-width: 400px;
+      }
+
+      .login-box h2 {
+        color: #ff8da1;
+        font-family: "Gaegu", cursive;
+        font-size: 2rem;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+
+      .login-box p {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+      }
+
+      .login-input {
+        width: 80%;
+        padding: 12px;
+        border: 2px solid #ffb6c1;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-family: "Noto Sans KR", sans-serif;
+        text-align: center;
+        outline: none;
+        margin-bottom: 20px;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .login-input:focus {
+        border-color: #ff8da1;
+      }
+
+      .login-btn {
+        background: #ff8da1;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        border-radius: 25px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+        font-family: "Noto Sans KR", sans-serif;
+        box-shadow: 0 4px 10px rgba(255, 141, 161, 0.4);
+      }
+
+      .login-btn:hover {
+        background: #ff69b4;
+        transform: translateY(-2px);
+      }
+      /* === [추가된 로그인 화면 스타일 끝] === */
+
       /* 2. 헤더: 반투명한 유리 느낌 + 다이어리 상단 장식 */
       .diary-header {
         background: rgba(255, 255, 255, 0.85);
@@ -117,7 +198,7 @@
       /* 4. 폴라로이드 사진 & 스크랩북 느낌의 카드 */
       .diary-entry {
         background: #ffffff;
-        padding: 15px 15px 25px 15px; /* 아래쪽 여백을 넓게 (폴라로이드 스타일) */
+        padding: 15px 15px 25px 15px;
         border-radius: 5px;
         box-shadow: 2px 6px 15px rgba(0, 0, 0, 0.08);
         position: relative;
@@ -128,7 +209,6 @@
         border: 1px solid #f0f0f0;
       }
 
-      /* 카드 위 마스킹 테이프 장식 */
       .diary-entry::before {
         content: "";
         position: absolute;
@@ -137,13 +217,12 @@
         transform: translateX(-50%) rotate(-3deg);
         width: 80px;
         height: 25px;
-        background-color: rgba(255, 182, 193, 0.7); /* 핑크색 반투명 테이프 */
+        background-color: rgba(255, 182, 193, 0.7);
         backdrop-filter: blur(2px);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         z-index: 2;
       }
 
-      /* 호버 시 지그재그로 기우는 효과 */
       .diary-entry:nth-child(odd):hover {
         transform: translateY(-8px) rotate(-3deg) scale(1.02);
         box-shadow: 4px 12px 20px rgba(0, 0, 0, 0.12);
@@ -153,7 +232,6 @@
         box-shadow: -4px 12px 20px rgba(0, 0, 0, 0.12);
       }
 
-      /* 첫 번째 '새로운 추억' 박스 특별 스타일 */
       .add-new-box {
         background: #fff0f5;
         border: 2px dashed #ff8da1;
@@ -168,12 +246,12 @@
       }
 
       .add-new-box::before {
-        display: none; /* 테이프 숨김 */
+        display: none;
       }
 
       .add-new-box:hover {
         background: #ffe4e1;
-        transform: translateY(-5px) !important; /* 회전 없이 위로만 */
+        transform: translateY(-5px) !important;
       }
 
       .card-img {
@@ -195,7 +273,6 @@
         text-align: center;
       }
 
-      /* 손글씨 느낌 강조 */
       .diary-content {
         color: #444;
         font-size: 1.25rem;
@@ -234,7 +311,7 @@
         transform: scale(1.1);
       }
 
-      /* 5. 팝업 모달 스타일 (진짜 다이어리 책 느낌 강화) */
+      /* 5. 팝업 모달 스타일 */
       .modal-overlay {
         display: none;
         position: fixed;
@@ -281,7 +358,6 @@
         flex-direction: column;
       }
 
-      /* 다이어리 책갈피 리본 효과 */
       .real-diary-book::after {
         content: "";
         position: absolute;
@@ -378,6 +454,21 @@
   </head>
 
   <body>
+    <div id="login-overlay" class="login-overlay">
+      <div class="login-box">
+        <h2>쉿, 비밀 일기장 🤫</h2>
+        <p>우리만의 소중한 기록, 비밀번호를 입력해주세요.</p>
+        <input
+          type="password"
+          id="secret-password"
+          class="login-input"
+          placeholder="비밀번호 8자리"
+          onkeypress="handleLoginEnter(event)"
+        />
+        <br />
+        <button class="login-btn" onclick="checkPassword()">입장하기 🗝️</button>
+      </div>
+    </div>
     <div class="diary-header">
       <div class="header-left">
         <div class="header-icon">🎀</div>
@@ -393,7 +484,6 @@
 
     <div class="container">
       <div class="diary-list">
-        <!-- 새 일기 작성 박스 -->
         <div class="diary-entry add-new-box" onclick="openWriteModal()">
           <div style="font-size: 3.5rem; margin-bottom: 10px">📸</div>
           <div
@@ -410,7 +500,6 @@
 
         <div id="dynamic-diaries-container" style="display: contents"></div>
 
-        <!-- 기존 다이어리 내용들 -->
         <div class="diary-entry" onclick="openStaticModal(this)">
           <img src="./img5/1.png" class="card-img" alt="기록 썸네일" />
           <div class="diary-date">2026. 01. 01</div>
@@ -548,7 +637,7 @@
             조명이 켜진 야경 속에서 한복을 입고 사진을 찍었는데, 배경과 옷이
             완벽하게 어우러져 정말 예쁘게 담겼다. 그 모습이 너무 아름다워 한참을
             넋 놓고 바라보게 되더라. 신명 나는 공연도 관람하고, (비록 나만
-            맞았지만!) 곤장 맞기 체험을 하며 한바탕 크게 웃기도 했다. 데이트의
+            맞았지만!) 곤장 맞기 체험을 평하며 한바탕 크게 웃기도 했다. 데이트의
             대미를 장식한 곳은 자동차 극장. 우리만의 독립된 공간에서 치킨을
             뜯으며 영화를 보니 세상에 우리 둘만 있는 듯한 오붓함이 느껴져 참
             좋았다. 과거의 낭만과 현대의 편안함을 모두 만끽한, 완벽하게 행복한
@@ -641,7 +730,6 @@
       </div>
     </div>
 
-    <!-- 다이어리 모달 (팝업) -->
     <div id="diary-modal" class="modal-overlay">
       <div class="real-diary-book">
         <button class="close-btn" onclick="closeModal()">✖</button>
@@ -664,6 +752,27 @@
     </div>
 
     <script>
+      // === [추가된 로그인 기능 스크립트 시작] ===
+      function checkPassword() {
+        const inputPwd = document.getElementById("secret-password").value;
+        if (inputPwd === "20260101") {
+          // 비밀번호가 맞으면 로그인 오버레이를 숨깁니다
+          document.getElementById("login-overlay").style.display = "none";
+        } else {
+          alert("비밀번호가 틀렸어요! 다시 확인해주세요 😥");
+          document.getElementById("secret-password").value = ""; // 입력창 초기화
+          document.getElementById("secret-password").focus(); // 입력창에 다시 포커스
+        }
+      }
+
+      // 엔터키를 눌러도 로그인이 되도록 하는 함수
+      function handleLoginEnter(event) {
+        if (event.key === "Enter") {
+          checkPassword();
+        }
+      }
+      // === [추가된 로그인 기능 스크립트 끝] ===
+
       // 새 글 쓰기 창 열기
       function openWriteModal() {
         const modal = document.getElementById("diary-modal");
